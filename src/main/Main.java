@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +25,21 @@ public class Main {
 	private static AbstractAlg alg = null;
 	
 	public static void main(String[] args) {
+		
+		if (args.length < 2) {
+			if (args[0].equals("RANDOM"))
+				System.err.println(String.join("\n"
+					, "I'm missing some arguments!"
+					, "The syntax for random input is:"
+					, "    java -jar <jarname> RANDOM <in path> <out path> <1,2,3 for algorithm> <dimension of points> <amount of points>"
+					, "Make sure the input and output paths include the names of the files. (both files will be created but need a name)"));
+			else
+				System.err.println(String.join("\n"
+						, "I'm missing some arguments!"
+						, "The syntax is:"
+						, "    java -jar <jarname> <in path> <out path>"
+						, "Make sure the input and output paths include the names of the files. (Outfile will be created but needs a name)"));
+		}
 		
 		if (args[0].equals("RANDOM")) {
 			try {
@@ -74,6 +90,7 @@ public class Main {
 			
 			points.add(p);
 		}
+		points.sort(new PointSortComp(dimension));
 		
 		} catch (Exception e) {
 			System.err.println("Error while trying to read input points.");
@@ -100,16 +117,18 @@ public class Main {
 		}
 		
 		// Time and execute
-		int execs = 500;
-		System.out.println("Executing " + execs + " times.");
+		int execs = 0;
+		System.out.println("Starting execution, I will run for 25 seconds and report my results.");
 		long start = System.currentTimeMillis();
-		for(int i = 0; i < execs; i++) {
+		while(System.currentTimeMillis() - start > 25000) {
+			execs += 1;
 			alg.execute();
 		}
 		long end = System.currentTimeMillis();
 		int millis = (int) (((double) end-start)/1.0);
 		int millisAvg = (int) (((double) end-start)/execs);
-		System.out.println(String.format("Stopped executing, %d ms (%d ms average) measured", millis, millisAvg));
+		System.out.println("Stopped executing.");
+		System.out.println(String.format("I ran for %d ms (%d ms average), and executed %d times.", millis, millisAvg, execs));
 		
 		String outString = "";
 		for (Double[] point : alg.getClosest()) {
@@ -124,6 +143,8 @@ public class Main {
 		out.println(millisAvg);
 		out.flush();
 		out.close();
+		
+		System.out.println("You can find the output @ " + args[1]);
 	}
 	
 	private static void makeRandom(PrintWriter inFile, int alg, int dim, int size) {
@@ -151,5 +172,24 @@ public class Main {
 		inFile.flush();
 		inFile.close();
 	}
-	
+
+	private static class PointSortComp implements Comparator<Double[]> {
+
+		private int dim = 0;
+		
+		public PointSortComp(int dim) {
+			this.dim = dim;
+		}
+		
+		@Override
+		public int compare(Double[] a, Double[] b) {
+			for (int d = 0; d < dim; d++) {
+				if (a[d] < b[d]) return -1;
+				if (a[d] > b[d]) return 1;
+				else continue;
+			}
+			return 0;
+		}
+		
+	}
 }
