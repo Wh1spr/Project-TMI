@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import main.algorithms.*;
@@ -142,7 +143,7 @@ public class Main {
 		while(i.hasNext()) {
 			outString = "";
 			for (int j = 0; j<dim; j++) {
-				outString += String.format("%17.16f ", i.next());
+				outString += String.format(Locale.US, "%17.16f ", i.next());
 			}
 			inFile.println(outString);
 		}
