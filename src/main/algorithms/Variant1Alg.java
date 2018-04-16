@@ -22,6 +22,8 @@ public class Variant1Alg extends AbstractAlg {
 		 */
 		
 		this.getOut().println("Dit algoritme is niet geïmplementeerd.");
+		this.getOut().flush();
+		this.getOut().close();
 		System.exit(1);
 		
 	}

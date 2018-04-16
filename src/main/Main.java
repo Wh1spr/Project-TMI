@@ -102,7 +102,7 @@ public class Main {
 		int execs = 500;
 		System.out.println("Executing " + execs + " times.");
 		long start = System.currentTimeMillis();
-		for(int i = 0; i < 500; i++) {
+		for(int i = 0; i < execs; i++) {
 			alg.execute();
 		}
 		long end = System.currentTimeMillis();

@@ -11,8 +11,12 @@ public class Variant2Alg extends AbstractAlg {
 
 	@Override
 	public void execute() {
+		this.shortestDist = Double.POSITIVE_INFINITY;
+		this.closestPoints = new Double[2][this.getDim()];
 		
 		this.getOut().println("Dit algoritme is niet geïmplementeerd.");
+		this.getOut().flush();
+		this.getOut().close();
 		System.exit(1);
 		
 	}
