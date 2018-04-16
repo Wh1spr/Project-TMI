@@ -1,0 +1,13 @@
+bin/
+build/
+.classpath
+.gitattributes
+.project
+.gradle/
+.gradle/2.14.1/
+.settings/
+gradle/
+Morty.db
+data/
+libs/
+

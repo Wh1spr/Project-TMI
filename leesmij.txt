@@ -1,0 +1,19 @@
+>>> Dit is niet de echte leesmij, maar gewoon zo ge weet hoe het ineenzit
+
+To execute, go with terminal to /BUILD/
+
+Gebruik het volgende commando:
+
+    java -jar toepMeetk.jar <input> <output>
+
+waarbij <input> het pad is naar het invoerbestand (in.txt) en
+output het uitvoerbestand (out.txt) (outputbestand moet niet bestaan, folder wel)
+
+Ik plan om ook deze te maken:
+
+    java -jar toepMeetk.jar RANDOM <input> <output> <ALGORITHM (1,2 or 3)> <DIM> <IN SIZE>
+
+    waarbij we eigenlijk een IN SIZE aantal random punten maken met DIM
+    dimensies en gebruik makend van ALGORITHM, met output file <output> en
+    ook <input> waar we de random putnen naar toe schrijven zoals we ze ook
+    als input zouden krijgen
