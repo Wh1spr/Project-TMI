@@ -26,20 +26,20 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		if (args.length < 2) {
-			if (args[0].equals("RANDOM"))
-				System.err.println(String.join("\n"
+		
+		if (args[0].equals("RANDOM") && args.length < 6)
+			System.err.println(String.join("\n"
+				, "I'm missing some arguments!"
+				, "The syntax for random input is:"
+				, "    java -jar <jarname> RANDOM <in path> <out path> <1,2,3 for algorithm> <dimension of points> <amount of points>"
+				, "Make sure the input and output paths include the names of the files. (both files will be created but need a name)"));
+		else
+			if (args.length < 2)
+			System.err.println(String.join("\n"
 					, "I'm missing some arguments!"
-					, "The syntax for random input is:"
-					, "    java -jar <jarname> RANDOM <in path> <out path> <1,2,3 for algorithm> <dimension of points> <amount of points>"
-					, "Make sure the input and output paths include the names of the files. (both files will be created but need a name)"));
-			else
-				System.err.println(String.join("\n"
-						, "I'm missing some arguments!"
-						, "The syntax is:"
-						, "    java -jar <jarname> <in path> <out path>"
-						, "Make sure the input and output paths include the names of the files. (Outfile will be created but needs a name)"));
-		}
+					, "The syntax is:"
+					, "    java -jar <jarname> <in path> <out path>"
+					, "Make sure the input and output paths include the names of the files. (Outfile will be created but needs a name)"));
 		
 		if (args[0].equals("RANDOM")) {
 			try {
@@ -114,13 +114,16 @@ public class Main {
 			System.out.println("Executing with Variant 2.");
 			alg = new Variant1Alg(points, dimension, out);
 			break;
+		default:
+			System.err.println(String.format("The selected algorithm \"%s\" does not exist. Please select '1' for Simple, '2' for Variant 1 or '3' for Variant 2.", in.get(0)));
+			System.exit(1);
 		}
 		
 		// Time and execute
 		int execs = 0;
 		System.out.println("Starting execution, I will run for 25 seconds and report my results.");
 		long start = System.currentTimeMillis();
-		while(System.currentTimeMillis() - start > 25000) {
+		while(System.currentTimeMillis() - start < 25000) {
 			execs += 1;
 			alg.execute();
 		}
