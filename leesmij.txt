@@ -1,19 +1,16 @@
->>> Dit is niet de echte leesmij, maar gewoon zo ge weet hoe het ineenzit
+Om het bestand uit te voeren, ga naar Terminal/cmd en voer volgend commando uit:
 
-To execute, go with terminal to /BUILD/
+	java -jar toepMeetk.jar <input> <output>
 
-Gebruik het volgende commando:
+waarbij <input> het pad is naar het invoerbestand (vb in.txt)
+en <output> het uitvoerbestand (vb out.txt) (outputbestand moet niet bestaan, folder wel)
 
-    java -jar toepMeetk.jar <input> <output>
+Indien extra en volledig willekeurige input nodig is, is volgend commando ook beschikbaar:
 
-waarbij <input> het pad is naar het invoerbestand (in.txt) en
-output het uitvoerbestand (out.txt) (outputbestand moet niet bestaan, folder wel)
+	java -jar toepMeetk.jar RANDOM <input> <output> <ALGORITHM (1,2 or 3)> <DIM> <IN SIZE>
+	
+Waarbij 'RANDOM' volledig hoofdletters moet zijn, <input> en <output> paden zijn naar bestanden
+(De bestanden zelf moeten niet bestaan bij uitvoering), <ALGORITHM (1,2 or 3)> het algoritme dat
+gebruikt moet worden, <DIM> het aantal dimensies van de punten, en <IN SIZE> het aantal punten.
 
-Ik plan om ook deze te maken:
-
-    java -jar toepMeetk.jar RANDOM <input> <output> <ALGORITHM (1,2 or 3)> <DIM> <IN SIZE>
-
-    waarbij we eigenlijk een IN SIZE aantal random punten maken met DIM
-    dimensies en gebruik makend van ALGORITHM, met output file <output> en
-    ook <input> waar we de random putnen naar toe schrijven zoals we ze ook
-    als input zouden krijgen
+!!! Bij RANDOM overschrijven we het gegeven input bestand of maken we het aan !!!
