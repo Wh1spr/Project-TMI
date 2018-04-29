@@ -25,7 +25,8 @@ public class Main {
 	private static AbstractAlg alg = null;
 	
 	public static void main(String[] args) {
-		
+//		
+		args = new String[] {"in2.txt", "out3.txt"};
 		
 		if (args[0].equals("RANDOM") && args.length < 6)
 			System.err.println(String.join("\n"
@@ -112,7 +113,7 @@ public class Main {
 		case "3":
 			//variant 2
 			System.out.println("Executing with Variant 2.");
-			alg = new Variant1Alg(points, dimension, out);
+			alg = new Variant2Alg(points, dimension, out);
 			break;
 		default:
 			System.err.println(String.format("The selected algorithm \"%s\" does not exist. Please select '1' for Simple, '2' for Variant 1 or '3' for Variant 2.", in.get(0)));
