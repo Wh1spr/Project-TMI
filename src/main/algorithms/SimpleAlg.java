@@ -22,10 +22,7 @@ public class SimpleAlg extends AbstractAlg {
 		for(int i = 0; i < this.getPoints().size(); i++) {
 			for(int j = i+1; j < this.getPoints().size(); j++) {
 				
-				currentDist = 0;
-				for(int dim = 0; dim < this.getDim(); dim++) {
-					currentDist += Math.pow(this.getPoints().get(i)[dim] - this.getPoints().get(j)[dim], 2);
-				}
+				currentDist = this.calcDist(this.getPoints().get(i), this.getPoints().get(j));
 				if (shortestDist > currentDist) {
 					closestPoints[0] = this.getPoints().get(i);
 					closestPoints[1] = this.getPoints().get(j);

@@ -35,5 +35,20 @@ public abstract class AbstractAlg {
 		return Math.sqrt(shortestDist);
 	}
 	
+	/**
+	 * Calculates the distance between two points squared.
+	 * @param a The first point
+	 * @param b The second point
+	 * @param d The amount of dimensions in a and b
+	 * @return distance between the two points squared.
+	 */
+	protected Double calcDist(Double[] a, Double[] b) {
+		double currentDist = 0;
+		for(int dim = 0; dim < this.getDim(); dim++) {
+			currentDist += Math.pow((a)[dim] - b[dim], 2);
+		}
+		return currentDist;
+	}
+	
 	public abstract void execute();
 }
