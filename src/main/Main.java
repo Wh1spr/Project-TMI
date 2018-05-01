@@ -25,8 +25,6 @@ public class Main {
 	private static AbstractAlg alg = null;
 	
 	public static void main(String[] args) {
-//		
-		args = new String[] {"in2.txt", "out3.txt"};
 		
 		if (args[0].equals("RANDOM") && args.length < 6)
 			System.err.println(String.join("\n"
@@ -55,6 +53,11 @@ public class Main {
 			args[1] = args[2]; 
 		}
 		
+		
+		if (args[1].equals("norun")) {
+			System.out.println("norun option was called, not executing.");
+			return;
+		}
 		
 		
 		// args[0] - in path
