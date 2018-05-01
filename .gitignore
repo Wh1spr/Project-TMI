@@ -10,5 +10,4 @@ gradle/
 Morty.db
 data/
 libs/
-in*
-out*
+tests/

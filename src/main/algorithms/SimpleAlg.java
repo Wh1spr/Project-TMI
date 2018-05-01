@@ -24,8 +24,11 @@ public class SimpleAlg extends AbstractAlg {
 				
 				currentDist = this.calcDist(this.getPoints().get(i), this.getPoints().get(j));
 				if (shortestDist > currentDist) {
-					closestPoints[0] = this.getPoints().get(i);
-					closestPoints[1] = this.getPoints().get(j);
+					// Indexes are switched here because Simple searches to the right of i,
+					// While the variants search to the left of index i, making them switch places
+					// in the output files
+					closestPoints[0] = this.getPoints().get(j);
+					closestPoints[1] = this.getPoints().get(i);
 					shortestDist = currentDist;
 				}
 			}
