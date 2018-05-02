@@ -28,13 +28,13 @@ sed -i.bak "1s/.*/2/" tests/in22.txt # changes alg
 cp tests/in12.txt tests/in32.txt
 sed -i.bak "1s/.*/3/" tests/in32.txt # changes alg
 
-# Making random files with 2000 points DIMENSION 3
-java -jar $PATH_JAR RANDOM tests/in13.txt norun 1 3 2000
+# Making random files with 3000 points DIMENSION 3
+java -jar $PATH_JAR RANDOM tests/in13.txt norun 1 3 3000
 cp tests/in13.txt tests/in23.txt
 sed -i.bak "1s/.*/2/" tests/in23.txt # changes alg
 
-# Making random files with 1500 points DIMENSION 4
-java -jar $PATH_JAR RANDOM tests/in14.txt norun 1 4 1500
+# Making random files with 3000 points DIMENSION 4
+java -jar $PATH_JAR RANDOM tests/in14.txt norun 1 4 3000
 cp tests/in14.txt tests/in24.txt
 sed -i.bak "1s/.*/2/" tests/in24.txt # changes alg
 
