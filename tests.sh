@@ -53,11 +53,10 @@ for NUM in $ALGS
 do
   for NUM2 in $DIMS
   do
-    echo " " >> tests/consoleOut.txt
-    echo "---" >> tests/consoleOut.txt
     java -jar $PATH_JAR tests/in$NUM$NUM2.txt tests/out$NUM$NUM2.txt >> tests/consoleOut.txt
     SECS=$(expr $SECS - 10)
     echo "$SECS seconds left."
+    echo "---" >> tests/consoleOut.txt
   done
 done
 
