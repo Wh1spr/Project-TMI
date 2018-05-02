@@ -11,3 +11,5 @@ Morty.db
 data/
 libs/
 tests/
+in*
+out*
