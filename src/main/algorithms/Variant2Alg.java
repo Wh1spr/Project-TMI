@@ -16,90 +16,54 @@ public class Variant2Alg extends AbstractAlg {
 	/**
 	 * this arraylist keeps the items sorted on y-value
 	 */
-	private List<Double[]> status = new ArrayList<Double[]>() {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-	    public boolean add(Double[] mt) {
-	         super.add(mt);
-	         Collections.sort(this, new Comparator<Double[]>() {
-				@Override
-				public int compare(Double[] o1, Double[] o2) {
-					return o1[1]<o2[1]?-1:1;
-				}
-	         });
-	         return true;
-	    }
-	}; 
-	private List<Double[]> pcopy = null;
+	private List<Double[]> ysorted = null;
+	Comparator<Double[]> compy = new Comparator<Double[]>() {
+			@Override
+			public int compare(Double[] o1, Double[] o2) {
+				return o1[1]<o2[1]?-1:1;
+			}
+		};
 	
-	//remove and add operation are the remove and add operations on status.
 	@Override
 	public void execute() {
-		status.clear();
-		pcopy = new ArrayList<Double[]>(this.getPoints());
-		if (this.getDim() != 2) {
-			this.getOut().println("Dit algoritme is niet geïmplementeerd voor dimensies niet gelijk aan 2. Gegeven dimensie: " + this.getDim());
-			this.getOut().flush();
-			this.getOut().close();
-			System.exit(1);
-		}
-		
 		this.shortestDist = Double.POSITIVE_INFINITY;
 		this.closestPoints = new Double[2][this.getDim()];
-		//algoritme	
-		Iterator<Double[]> iterx = Collections.unmodifiableList(pcopy).iterator();
-		Iterator<Double[]> itery = null;
-		Double[] x = null;
-		Double[] y = null;
-		while(iterx.hasNext()) { //doorlooplijn
-			x = iterx.next(); // point being checked
-			itery = Collections.unmodifiableCollection(status).iterator();
-			while(itery.hasNext()) {
-				//search, plus remove out of range x
-				y = itery.next();
-				if (y[0] < x[0] - this.shortestDist) status.remove(y);
-				if (Math.abs(x[1] - y[1]) > this.shortestDist) {
-					if (x[1] - y[1] < 0) break;
-					else continue;
-				}
-				
-				double dist = Math.pow(y[0] - x[0], 2) + Math.pow(y[1] - x[1], 2);
-				if (shortestDist > dist) {
-					closestPoints[0] = x;
-					closestPoints[1] = y;
-					shortestDist = dist;
+		this.ysorted = new ArrayList<Double[]>();
+		
+		// convenience
+		List<Double[]> p = this.getPoints();
+		
+		int iterfrom = 0;
+		
+		// Loop over all the points, we start from the second point so that
+		// we have at least 1 point in front of it, and thus we have an initial distance.
+		for (int i = 1; i < this.getPoints().size(); i++) { 
+			//X direction
+			for(int j = iterfrom; j < i; j++) {
+				//find first eligible point
+				if (p.get(i)[0] - p.get(j)[0] > Math.sqrt(shortestDist)) {
+					iterfrom++;
+					continue;
 				}
 			}
-			status.add(x);
-		}
-	}
-	
-	private Double[] above(Double[] a) {
-		if(status.indexOf(a)>=0) return status.get(status.indexOf(a)+1);
-		status.add(a);
-		Double[] result = null;
-		try {
-			result = status.get(status.indexOf(a)+1);
-		} catch (Exception e) {
-			status.remove(a);
-			return null;
-		}
-		status.remove(a);
-		return result;
-	}
-
-	private Double[] under(Double[] a) {
-		if(status.indexOf(a)<=0) return status.get(status.indexOf(a)+1);
-		status.add(a);
-		Double[] result = null;
-		try {
-			result = status.get(status.indexOf(a)-1);
-		} catch (Exception e) {
-			status.remove(a);
-			return null;
-		}
-		status.remove(a);
-		return result;
+				
+			//Y erection
+			this.ysorted.addAll(p.subList(iterfrom, i+1));
+			this.ysorted.sort(compy);
+			
+			for(int j = 0; j < ysorted.size(); j++) {
+				if(Math.abs(p.get(i)[1] - ysorted.get(j)[1]) > shortestDist) continue;
+				
+				// calc dist and check
+				// copied from SimpleAlg.java
+				double currentDist = this.calcDist(p.get(i), ysorted.get(j)); // This is most intensive operation
+				if (shortestDist > currentDist) {
+					closestPoints[0] = this.getPoints().get(i);
+					closestPoints[1] = ysorted.get(j);
+					shortestDist = currentDist;
+				}
+			}
+			this.ysorted.clear();
+		}	
 	}
 }
