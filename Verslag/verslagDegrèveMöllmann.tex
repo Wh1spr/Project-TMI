@@ -1,0 +1,38 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[dutch]{babel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\author{Wolfgang M\"ollmann \& Robbe Degr\`eve}
+\title{Toepassingen van meetkunde in de informatica \\ Project: Bepaling van het Dichtste Puntenpaar}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Opdracht 1: Hoog-niveau beschrijving van verscheidene algoritmes}
+\begin{algorithm}
+\caption{Bereken het dichtste Puntenpaar van een verzameling punten}
+\begin{algorithmic}
+	\STATE \textbf{Input:}  $rij$: Array met $N$ punten (gesorteerd naar stijgende x-co\"ordinaat)
+  \STATE $d$ = $+\infty$
+	\STATE $closestPoints[2]$ $\gets \emptyset$
+  \STATE $currentDist$ = 0
+    \FORALL{$i$ in $rij$}
+      \FORALL{$j = i + 1$ in $rij$}
+        \STATE $currentDist$ = bereken\_afstand($rij[i]$, $rij[j]$)
+        \IF {$d > currentDist$}
+          \STATE $closestPoints[0]$ = rij[i]
+          \STATE $closestPoints[1]$ = rij[j]
+          \STATE $d$ = currentDist
+        \ENDIF
+      \ENDFOR
+    \ENDFOR
+    \RETURN $closestPoints$
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
