@@ -79,6 +79,10 @@ public class Main {
 		//get le input
 		try { // to identify problems if they should arise
 		int numberOfPoints = Integer.parseInt(in.get(2));
+		if (numberOfPoints < 2) {
+			System.err.println("There need to be at least two points. Given value was: " + numberOfPoints);
+			System.exit(1);
+		}
 		System.out.println("Reading in " + numberOfPoints + " points.");
 		points = new ArrayList<Double[]>(numberOfPoints + 10); //+ 10 to have a chance to not have the array expand
 		

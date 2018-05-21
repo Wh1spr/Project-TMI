@@ -13,33 +13,17 @@ public class Variant1Alg extends AbstractAlg {
 	public void execute() {
 		this.shortestDist = Double.POSITIVE_INFINITY;
 		this.closestPoints = new Double[2][this.getDim()];
-		/*
-		 * Kijk naar Abstractalg voor de methods die je kan gebruiken,
-		 * enige waar je moet voor zorgen is dat op het einde van execute()
-		 * de twee punten in closestPoints zitten en de de afstand tussen die 
-		 * twee in shortestDist zit !!GEKWADRATEERDE AFSTAND!!, echte afstand wordt in 
-		 * AbstractAlg berekend.
-		 */
 		
 		// convenience
 		List<Double[]> p = this.getPoints();
-		
-		// Points is already sorted by in all it's dimensions, so we can have an int "iterFrom"
-		// for the second loop, so it ignores all points with x values smaller than current X - sqrt(shortestDist)
-		// This has the added benefit we do not change points anywhere in the algorithm.
 		
 		int iterfrom = 0;
 		
 		// Loop over all the points, we start from the second point so that
 		// we have at least 1 point in front of it, and thus we have an initial distance.
 		for (int i = 1; i < this.getPoints().size(); i++) { 
-			
-			for(int j = iterfrom; j < i; j++) {
-				//find first eligible point
-				if (p.get(i)[0] - p.get(j)[0] > Math.sqrt(shortestDist)) {
-					iterfrom++;
-					continue;
-				} 
+			int j = i-1;
+			while (p.get(i)[0] - p.get(j)[0] < Math.sqrt(shortestDist)) {
 				
 				// calc dist and check
 				// copied from SimpleAlg.java
@@ -49,6 +33,9 @@ public class Variant1Alg extends AbstractAlg {
 					closestPoints[1] = this.getPoints().get(j);
 					shortestDist = currentDist;
 				}
+				if (j==0) {
+					break;
+				} else j--;
 				
 			}
 			
