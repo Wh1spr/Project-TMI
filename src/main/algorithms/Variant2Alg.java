@@ -16,46 +16,45 @@ public class Variant2Alg extends AbstractAlg {
 		super(points, dim, outWriter);
 	}
 
-	private TreeSet<Double[]> ysort = null;
 	Comparator<Double[]> compy = new Comparator<Double[]>() {
-			@Override
-			public int compare(Double[] o1, Double[] o2) {
-				if (o1 == null) return -1; // this is root, and root will be lower than hi   in this case
-				if (o2 == null) return -1; // this is root, and lo   will be lower than root in this case
-				if (o1 == o2) return 0; // case for two null values
-				return BigDecimal.valueOf(o1[1]).subtract(BigDecimal.valueOf(o2[1]))
-						.setScale(0, RoundingMode.UP).intValue();
-//				if (o1==null||o2==null) return 0;
-//				if (o1[1]==o2[1]) return 0;
-//				return o1[1]<o2[1]?-1:1;
-			}
-		};
+		@Override
+		public int compare(Double[] o1, Double[] o2) {
+			if (o1 == null) return -1; // this is root, and root will be lower than hi   in this case
+			if (o2 == null) return -1; // this is root, and lo   will be lower than root in this case
+			if (o1 == o2) return 0; // case for two null values
+			return BigDecimal.valueOf(o1[1]).subtract(BigDecimal.valueOf(o2[1]))
+					.setScale(0, RoundingMode.UP).intValue();
+//			if (o1==null||o2==null) return 0;
+//			if (o1[1]==o2[1]) return 0;
+//			return o1[1]<o2[1]?-1:1;
+		}
+	};
+	
+	private TreeSet<Double[]> ysort = new TreeSet<Double[]>(compy) {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public String toString() {
+			Iterator<Double[]> it = iterator();
+	        if (! it.hasNext())
+	            return "[]";
+
+	        StringBuilder sb = new StringBuilder();
+	        sb.append('[');
+	        for (;;) {
+	            Double[] e = it.next();
+	            sb.append(e[1]);
+	            if (! it.hasNext())
+	                return sb.append(']').toString();
+	            sb.append(',').append(' ');
+	        }
+		}
+	};
 	
 	@Override
 	public void execute() {
 		this.shortestDist = 36d;
-				//this.calcDist(this.getPoints().get(0), this.getPoints().get(1));
 		this.closestPoints = new Double[2][this.getDim()];
-		this.ysort = new TreeSet<Double[]>(compy) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String toString() {
-				Iterator<Double[]> it = iterator();
-		        if (! it.hasNext())
-		            return "[]";
-
-		        StringBuilder sb = new StringBuilder();
-		        sb.append('[');
-		        for (;;) {
-		            Double[] e = it.next();
-		            sb.append(e[1]);
-		            if (! it.hasNext())
-		                return sb.append(']').toString();
-		            sb.append(',').append(' ');
-		        }
-			}
-		};
 		
 		// convenience
 		List<Double[]> p = this.getPoints();
@@ -83,7 +82,6 @@ public class Variant2Alg extends AbstractAlg {
 			if (compy.compare(lo, hi) > 0) continue;
 			
 //			System.out.println(String.format("Floor = %f\nCeiling = %f\nTreeset = %s\n\n", floor[1], ceil[1], ysort.toString()));
-			
 			ylist = ysort.subSet(lo,true,hi,true);
 			iter = ylist.iterator();
 			next = null;
