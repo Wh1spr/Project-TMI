@@ -17,14 +17,13 @@ public class Variant1Alg extends AbstractAlg {
 		// convenience
 		List<Double[]> p = this.getPoints();
 		
-		int iterfrom = 0;
-		
 		// Loop over all the points, we start from the second point so that
 		// we have at least 1 point in front of it, and thus we have an initial distance.
 		for (int i = 1; i < this.getPoints().size(); i++) { 
-			int j = i-1;
-			while (p.get(i)[0] - p.get(j)[0] < Math.sqrt(shortestDist)) {
-				
+			for (int j = i-1; j >= 0; j--) {
+				if (p.get(i)[0] - p.get(j)[0] > Math.sqrt(shortestDist)) {
+					break;
+				}
 				// calc dist and check
 				// copied from SimpleAlg.java
 				double currentDist = this.calcDist(p.get(i), p.get(j)); // This is most intensive operation
@@ -33,9 +32,6 @@ public class Variant1Alg extends AbstractAlg {
 					closestPoints[1] = this.getPoints().get(j);
 					shortestDist = currentDist;
 				}
-				if (j==0) {
-					break;
-				} else j--;
 				
 			}
 			
