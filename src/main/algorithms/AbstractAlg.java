@@ -18,6 +18,10 @@ public abstract class AbstractAlg {
 		this.out = outWriter;
 	}
 	
+	public void setPoints(List<Double[]> points) {
+		this.points = points;
+	}
+	
 	public List<Double[]> getPoints() {
 		return this.points;
 	}

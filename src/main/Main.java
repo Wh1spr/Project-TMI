@@ -184,7 +184,7 @@ public class Main {
 		inFile.close();
 	}
 
-	private static class PointSortComp implements Comparator<Double[]> {
+	public static class PointSortComp implements Comparator<Double[]> {
 
 		private int dim = 0;
 		
