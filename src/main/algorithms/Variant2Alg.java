@@ -1,8 +1,9 @@
 package main.algorithms;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -19,40 +20,78 @@ public class Variant2Alg extends AbstractAlg {
 	Comparator<Double[]> compy = new Comparator<Double[]>() {
 			@Override
 			public int compare(Double[] o1, Double[] o2) {
-				if (o1==null||o2==null) return 0;
-				if (o1[1]==o2[1]) return 0;
-				return o1[1]<o2[1]?-1:1;
+				if (o1 == null) return -1; // this is root, and root will be lower than hi   in this case
+				if (o2 == null) return -1; // this is root, and lo   will be lower than root in this case
+				if (o1 == o2) return 0; // case for two null values
+				return BigDecimal.valueOf(o1[1]).subtract(BigDecimal.valueOf(o2[1]))
+						.setScale(0, RoundingMode.UP).intValue();
+//				if (o1==null||o2==null) return 0;
+//				if (o1[1]==o2[1]) return 0;
+//				return o1[1]<o2[1]?-1:1;
 			}
 		};
 	
 	@Override
 	public void execute() {
-		this.shortestDist = Double.POSITIVE_INFINITY;
+		this.shortestDist = 36d;
 				//this.calcDist(this.getPoints().get(0), this.getPoints().get(1));
 		this.closestPoints = new Double[2][this.getDim()];
-		this.ysort = new TreeSet<Double[]>(compy);
+		this.ysort = new TreeSet<Double[]>(compy) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String toString() {
+				Iterator<Double[]> it = iterator();
+		        if (! it.hasNext())
+		            return "[]";
+
+		        StringBuilder sb = new StringBuilder();
+		        sb.append('[');
+		        for (;;) {
+		            Double[] e = it.next();
+		            sb.append(e[1]);
+		            if (! it.hasNext())
+		                return sb.append(']').toString();
+		            sb.append(',').append(' ');
+		        }
+			}
+		};
 		
 		// convenience
 		List<Double[]> p = this.getPoints();
 		
+		Double[] floor;
+		Double[] ceil;
+		Double[] lo;
+		Double[] hi;
+		SortedSet<Double[]> ylist;
+		Iterator<Double[]> iter;
+		Double[] next;
 		// Loop over all the points, we start from the second point so that
 		// we have at least 1 point in front of it, and thus we have an initial distance.
 		for (int i = 1; i < this.getPoints().size(); i++) { 
 			ysort.add(p.get(i-1));
 			
-			Double[] floor = p.get(i).clone();
-			floor[1] += Math.sqrt(this.shortestDist);
-			Double[] ceil = p.get(i).clone();
-			ceil[1] -= Math.sqrt(this.shortestDist);
+			floor = p.get(i).clone();
+			ceil = p.get(i).clone();
+			ceil[1] += Math.sqrt(this.shortestDist);
+			floor[1] -= Math.sqrt(this.shortestDist);
 			
-			SortedSet<Double[]> ylist = ysort.subSet(ysort.ceiling(ceil),true,ysort.floor(floor),true);
-			Iterator<Double[]> iter = ylist.iterator();
-			Double[] next = null;
+			lo = ysort.ceiling(floor);
+			hi = ysort.floor(ceil);
+			
+			if (compy.compare(lo, hi) > 0) continue;
+			
+//			System.out.println(String.format("Floor = %f\nCeiling = %f\nTreeset = %s\n\n", floor[1], ceil[1], ysort.toString()));
+			
+			ylist = ysort.subSet(lo,true,hi,true);
+			iter = ylist.iterator();
+			next = null;
 			while(iter.hasNext()) {
 				next = iter.next();
 				//check x
 				if (p.get(i)[0] - next[0] > Math.sqrt(this.shortestDist)) {
-					ysort.remove(next);
+					iter.remove();
 					continue;
 				}
 				
