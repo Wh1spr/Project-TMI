@@ -13,3 +13,8 @@ libs/
 tests/
 in*
 out*
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.gz
