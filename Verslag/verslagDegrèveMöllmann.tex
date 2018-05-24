@@ -5,6 +5,7 @@
 \usepackage{algorithmic}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{graphicx}
 
 \author{Wolfgang M\"ollmann \& Robbe Degr\`eve}
 \title{Toepassingen van meetkunde in de informatica \\ Project: Bepaling van het Dichtste Puntenpaar}
@@ -133,9 +134,36 @@ Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal du
 	\STATE $t$: gegevensstructuur waarin punten links van de doorlooplijn opgeslagen zijn, gesorteerd naar stijgende y-coordinaat
 
 
-
 \end{algorithmic}
 \end{algorithm}
+
+\section{Grafieken}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{Simpel-var1-rekentijd.png}
+\caption{De plot van de rekentijden tussen het brute-force algoritme en variant 1}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{punten-Kmax.png}
+\caption{De plot tussen het aantal punten en Kmax}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{punten-Kavg}
+\caption{De plot tussen het aantal punten en Kavg}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
+\caption{De plot tussen het aantal dimensies en de rekentijd van variant 1}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{dim-Kavg.png}
+\caption{De plot tussen het aantal dimensies en Kavg}
+\end{figure}
+
 
 
 
