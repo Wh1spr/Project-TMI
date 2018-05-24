@@ -81,7 +81,7 @@ public class Data {
 			end = System.nanoTime();
 			
 			kmaxavg = kmaxavg / 30d;
-			kavgavg = kmaxavg / 30d;
+			kavgavg = kavgavg / 30d;
 			
 			out.print((int)(((double) end-start)/30) + ",");
 			out.print(String.format("%.8f,%.8f\n", kmaxavg, kavgavg));
