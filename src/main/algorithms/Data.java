@@ -62,22 +62,29 @@ public class Data {
 			
 			out.print((int)(((double) end-start)/10) + ",");
 			
-			a = new Variant1Alg(p, 2, null);
+			Variant1Alg b = new Variant1Alg(p, 2, null);
+			
+			double kmaxavg = 0;
+			double kavgavg = 0;
 			
 			start = System.nanoTime();
 			for(int execs = 0; execs < 30; execs++) {
 				long cnstart = System.nanoTime();
 				p = makeRandom(2, i, out);
-				a.setPoints(p);
+				b.setPoints(p);
 				long cnstop = System.nanoTime();
 				start += cnstop-cnstart;
-				a.execute();
+				b.execute();
+				kmaxavg += b.getkmax();
+				kavgavg += b.getkavg();
 			}
 			end = System.nanoTime();
 			
+			kmaxavg = kmaxavg / 30d;
+			kavgavg = kmaxavg / 30d;
+			
 			out.print((int)(((double) end-start)/30) + ",");
-			Variant1Alg b = (Variant1Alg) a;
-			out.print(b.getkmax() + "," + b.getkavg() + "\n");
+			out.print(String.format("%.8f,%.8f\n", kmaxavg, kavgavg));
 			System.out.println("Current points: " + i + " - " + p.size());
 			out.flush();
 		}
@@ -106,6 +113,9 @@ public class Data {
 			
 			out.print("2500,"+dim + ",");
 			
+			double kmaxavg = 0;
+			double kavgavg = 0;
+			
 			writeRand = true;
 			long start = System.nanoTime();
 			for(int execs = 0; execs < 50; execs++) {
@@ -116,10 +126,17 @@ public class Data {
 				long cnstop = System.nanoTime();
 				start += cnstop-cnstart;
 				a.execute();
+				kmaxavg += a.getkmax();
+				kavgavg += a.getkavg();
 			}
 			long end = System.nanoTime();
-			out.print((int)(((double) end-start)/30) + ",");
-			out.print(a.getkmax() + "," + a.getkavg() + "\n");
+			
+			kmaxavg = kmaxavg / 50d;
+			kavgavg = kmaxavg / 50d;
+			
+			out.print((int)(((double) end-start)/50) + ",");
+			out.print(String.format("%.8f,%.8f\n", kmaxavg, kavgavg));
+			
 			System.out.println("current dim: " + dim);
 		}
 		

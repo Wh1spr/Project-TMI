@@ -9,17 +9,17 @@ public class Variant1Alg extends AbstractAlg {
 		super(points, dim, outWriter);
 	}
 
-	private int kmax = 0;
+	private double kmax = 0d;
 	private double kavg = 0d;
-	private int ktotal = 0;
+	private double ktotal = 0d;
 	
-	public int getkmax() {
+	public double getkmax() {
 		return this.kmax;
 	}
 	public double getkavg() {
 		return this.kavg;
 	}
-	public int getktotal() {
+	public double getktotal() {
 		return this.ktotal;
 	}
 	
@@ -27,10 +27,10 @@ public class Variant1Alg extends AbstractAlg {
 	public void execute() {
 		this.shortestDist = Double.POSITIVE_INFINITY;
 		this.closestPoints = new Double[2][this.getDim()];
-		this.kmax = 0;
+		this.kmax = 0d;
 		this.kavg = 0d;
-		this.ktotal = 0;
-		int kthis = 0;
+		this.ktotal = 0d;
+		double kthis = 0d;
 		// convenience
 		List<Double[]> p = this.getPoints();
 		
