@@ -129,9 +129,9 @@ public class Main {
 		
 		// Time and execute
 		int execs = 0;
-		System.out.println("Starting execution, I will run for 10 seconds and report my results.");
+		System.out.println("Starting execution, I will run for 5 seconds and report my results.");
 		long start = System.currentTimeMillis();
-		while(System.currentTimeMillis() - start < 10000) {
+		while(System.currentTimeMillis() - start < 5000) {
 			execs += 1;
 			alg.execute();
 		}

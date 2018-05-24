@@ -42,10 +42,10 @@ rm tests/*.bak
 
 ALGS="1 2"
 DIMS="2 3 4"
-SECS=70
+SECS=35
 
 echo " "
-echo "Executing all programs, this should take 70 seconds."
+echo "Executing all programs, this should take $SECS seconds."
 echo "You can find console output @ tests/consoleOut.txt"
 echo " "
 
@@ -54,7 +54,7 @@ do
   for NUM2 in $DIMS
   do
     java -jar $PATH_JAR tests/in$NUM$NUM2.txt tests/out$NUM$NUM2.txt >> tests/consoleOut.txt
-    SECS=$(expr $SECS - 10)
+    SECS=$(expr $SECS - 5)
     echo "$SECS seconds left."
     echo "---" >> tests/consoleOut.txt
   done
