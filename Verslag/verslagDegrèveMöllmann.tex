@@ -26,30 +26,30 @@ Deze functiezal de volgende parameters als input vragen:
 		\item size: het aantal punten N
 \end{enumerate}
 
-Deze functie heeft als taak om een inputbestand optestellen met willekeurge co\"ordinaten.
-De functie zal de gegeven parameters eers neerschrijven in de Infile.
-Daarna gebeurd een initialisatie van Random r.
-Daarna zullen we per regel van het bestand itereren van 0 tot en met de dimensie en een willekeurige waarde neerschrijven in het bestand.
-De willeukeurige co\"ordinaten kunnen waardes aannemen tussen [0, 5[.
+Deze functie heeft als taak om een inputbestand op te stellen met willekeurge co\"ordinaten.
+De functie zal de gegeven parameters eerst neerschrijven in de inFile.
+Daarna gebeurd een initialisatie van \texttt{Random r}.
+Daarna zullen we per regel van het bestand itereren van 0 tot en met de dimensie en voor iedere dimensie een willekeurige waarde neerschrijven in het bestand.
+De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 
-Voor de $worst-case$ puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor M = 2 hebben we een javafunctie "makeWorstCase".
+Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor M = 2 hebben we een javafunctie \texttt{makeWorstCase}.
 In deze functie maken een puntenverzameling aan van één kolom, waarbij alle punten dezelfde x-waarde hebben.
 De y-waarde speelt hierbij geen rol.
 In onze rij-implementatie sorteren we de punten met dezelfde x-waarden volgens de y-waarde.
 Het tweede punt zal dus enkel vergelijken met het punt boven hem.
 Het derde punt zal nadien vergelijken met het eerste en het tweede punt.
 Uiteindelijk zal het laatste (onderste) punt zal dus met alle punten vergelijken.
-Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal dus O($n^2/2$) zijn.
+Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De complexiteit zal dus $O(n^2/2)$ zijn.
 
 
 \begin{algorithm}
-\caption{De javafunctie "makeRandom"}
+\caption{De javafunctie \texttt{makeRandom}}
 \begin{algorithmic}
 \STATE \textbf{Input:} $inFile$, $alg$, $dim$, $size$
 \STATE infile.println(alg)
 \IF {$dim < 2$}
 	\PRINT Dimension needs to be greater or equal to 2.
-	\STATE $Exit$
+	\STATE \texttt{Exit}
 \ENDIF
 \STATE Random r = new Random()
 \STATE $Iterator<Double> i$ = r.doubles(size * dim, 0.0, 5.0).iterator()
@@ -59,7 +59,7 @@ Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal du
 	\FOR {$j = 0$; $j < dim$; j++}
 		\STATE outString += String.format(Locale.US, "\%17.16f ", i.next())
 	\ENDFOR
-	\STATE infile.println($outString$)
+	\STATE inFile.println($outString$)
 \ENDWHILE
 \STATE inFile.flush()
 \STATE inFile.close()
@@ -73,7 +73,7 @@ Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal du
 \subsubsection{hoogniveau beschrijving}
 
 \begin{algorithm}
-\caption{Bereken het dichtste Puntenpaar met brute-force}
+\caption{Bereken het dichtste puntenpaar met brute-force}
 \begin{algorithmic}
 	\STATE \textbf{Input:}  $rij$: Array met $N$ punten (gesorteerd naar stijgende x-co\"ordinaat)
   \STATE $d$ = $+\infty$
@@ -93,6 +93,7 @@ Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal du
 \end{algorithmic}
 \end{algorithm}
 
+\newpage
 \subsection{Variant 1 algorithm}
 \subsubsection{hoogniveau beschrijving}
 
@@ -141,10 +142,13 @@ Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal du
 
 In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant1 vergelijken.
 We zullen op de x-as het aantal punten uitzetten.
+% Deze 302 komt eigenlijk omdat ik van 250 ben begonnen -> 275 -> 302, maar onder 300 gaf was omdat
+% wel een beetje afwijkend van de verwachte rechte
 De gekozen aantal punten zijn logaritmisch bepaald met als basis 1.1 beginnend vanaf 302 tot en met 12279.
-\\TODO Waarom gekozen voor log met b=1.1
+% TODO Waarom gekozen voor log met b=1.1 => Echt puur voor meer datapunten te hebben zonder dat ik uren moet wachten
 Op de y-as zetten we de rekentijd uit in milliseconden. Hiervoor gebruiken we een logaritmische functie met basis 2.
-\\TODO wel verband precies kunnen we concluderen (lineair, expo, ...)
+% TODO wel verband precies kunnen we concluderen (lineair, expo, ...)
+% Goeie vraag, ze lijken allebei FACTOR * N^2 te zijn niet? met die base 2 voor het logaritme?
 We kunnen concluderen uit deze plot dat variant 1 voor alle onze gekozen punten een effeciënter algoritme is.
 We kunnen ook zien dat de het brute-force algoritme een steiler verloop heeft, hieruit kunnen we afleiden dat voor zeer grote aantallen punten het verschil tussen de twee algoritmes steeds groter worden.
 
