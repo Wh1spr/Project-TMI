@@ -41,6 +41,11 @@ public class Variant2Alg extends AbstractAlg {
 			
 			next = ysort.lower(p.get(i));
 			while(next != null && next[1] > p.get(i)[1] - Math.sqrt(this.shortestDist)) {
+				if (next[0] < p.get(i)[0] - Math.sqrt(this.shortestDist)) {
+					ysort.remove(next);
+					next = ysort.lower(next);
+					continue;
+				}
 				double currentDist = this.calcDist(p.get(i), next); // This is most intensive operation
 				if (shortestDist > currentDist) {
 					closestPoints[0] = this.getPoints().get(i);
@@ -52,6 +57,11 @@ public class Variant2Alg extends AbstractAlg {
 			
 			next = ysort.higher(p.get(i));
 			while(next != null && next[1] < p.get(i)[1] - Math.sqrt(this.shortestDist)) {
+				if (next[0] < p.get(i)[0] - Math.sqrt(this.shortestDist)) {
+					ysort.remove(next);
+					next = ysort.higher(next);
+					continue;
+				}
 				double currentDist = this.calcDist(p.get(i), next); // This is most intensive operation
 				if (shortestDist > currentDist) {
 					closestPoints[0] = this.getPoints().get(i);
@@ -61,8 +71,7 @@ public class Variant2Alg extends AbstractAlg {
 				next = ysort.higher(next);
 			}
 			
-		}	
-		
+		}
 		ysort.clear();
 	}
 	
