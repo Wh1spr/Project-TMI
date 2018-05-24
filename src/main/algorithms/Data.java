@@ -84,7 +84,7 @@ public class Data {
 			kavgavg = kavgavg / 30d;
 			
 			out.print((int)(((double) end-start)/30) + ",");
-			out.print(String.format("%.8f,%.8f\n", kmaxavg, kavgavg));
+			out.print(String.format("%12f,%12f\n", kmaxavg, kavgavg));
 			System.out.println("Current points: " + i + " - " + p.size());
 			out.flush();
 		}
@@ -107,7 +107,7 @@ public class Data {
 		out.print("#Points,Dimension,sorttime,ExecBruteNano,ExecVar1Nano,Kmax,Kavg\n");
 		
 		List<Double[]> p = null;
-		for (int dim = 2; dim < 20; dim++) {
+		for (int dim = 2; dim < 30; dim++) {
 			writeRand = false;
 			p = makeRandom(dim, 2500, out);
 			a = new Variant1Alg(p, dim, null);
@@ -151,7 +151,7 @@ public class Data {
 			kavgavg = kavgavg / 50d;
 			
 			out.print((int)(((double) end-start)/50) + ",");
-			out.print(String.format("%.8f,%.8f\n", kmaxavg, kavgavg));
+			out.print(String.format("%12f,%12f\n", kmaxavg, kavgavg));
 			
 			System.out.println("current dim: " + dim);
 		}
