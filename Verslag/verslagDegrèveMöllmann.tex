@@ -139,29 +139,54 @@ Dit zal ons uiteindelijk $n(n+1)/2$ vergelijkingen geven. De complexiteit zal du
 
 \section{Grafieken}
 
+In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant1 vergelijken.
+We zullen op de x-as het aantal punten uitzetten.
+De gekozen aantal punten zijn logaritmisch bepaald met als basis 1.1 beginnend vanaf 302 tot en met 12279.
+\\TODO Waarom gekozen voor log met b=1.1
+Op de y-as zetten we de rekentijd uit in milliseconden. Hiervoor gebruiken we een logaritmische functie met basis 2.
+\\TODO wel verband precies kunnen we concluderen (lineair, expo, ...)
+We kunnen concluderen uit deze plot dat variant 1 voor alle onze gekozen punten een effeciënter algoritme is.
+We kunnen ook zien dat de het brute-force algoritme een steiler verloop heeft, hieruit kunnen we afleiden dat voor zeer grote aantallen punten het verschil tussen de twee algoritmes steeds groter worden.
+
 \begin{figure}
 \includegraphics[width=\textwidth]{Simpel-var1-rekentijd.png}
 \caption{De plot van de rekentijden tussen het brute-force algoritme en variant 1}
 \end{figure}
+
+In figuur 2 zullen we het verband tussen de Kmax en het aantal punten plotten.
+Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1,1.
+Op de y-as zetten we de Kmax uit die in dit geval zal gaan van een minimum van 2 tot en met een maximum van 25.
+We kunnen op de plot zien dat de grafiek Kmax een licht stijgend karakter heeft.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{punten-Kmax.png}
 \caption{De plot tussen het aantal punten en Kmax}
 \end{figure}
 
+In figuur 3 zullen we het verband tussen de Kavg en het aantal punten plotten.
+Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1.1.
+Op de y-as zetten we de Kmax uit die in dit geval zal gaan van een minimum van 0,1480 tot en met een maximum van 2,14186.
+Op deze plot is duidelijk te herkennen dat Kavg ongeveer constant zal blijven ongeacht het aantal punten.
+In ons experiment was deze constante rond 1,35.
+
 \begin{figure}
 \includegraphics[width=\textwidth]{punten-Kavg}
 \caption{De plot tussen het aantal punten en Kavg}
 \end{figure}
 
+In Figuur 4 zullen we de het aantal dimensies plotten in functie van de rekentijd voor variant 1.
+We zullen op de x-as het aantal dimensies uitzetten van 2 tot en met 19.
+Op de y-as zetten we de rekentijd uit in milliseconden.
+
+
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
-\caption{De plot tussen het aantal dimensies en de rekentijd van variant 1}
+\caption{De plot tussen het aantal dimensies en de rekentijd van variant 1 (voor 2500 punten)}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-Kavg.png}
-\caption{De plot tussen het aantal dimensies en Kavg}
+\caption{De plot tussen het aantal dimensies en Kavg (voor 2500 punten)}
 \end{figure}
 
 
