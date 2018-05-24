@@ -102,14 +102,16 @@ public class Data {
 		}
 		
 		Variant1Alg a = null;
+		SimpleAlg b = null;
 		
-		out.print("#Points,Dimension,ExecNano,Kmax,Kavg\n");
+		out.print("#Points,Dimension,sorttime,ExecBruteNano,ExecVar1Nano,Kmax,Kavg\n");
 		
 		List<Double[]> p = null;
 		for (int dim = 2; dim < 20; dim++) {
 			writeRand = false;
 			p = makeRandom(dim, 2500, out);
 			a = new Variant1Alg(p, dim, null);
+			b = new SimpleAlg(p,dim,null);
 			
 			out.print("2500,"+dim + ",");
 			
@@ -118,6 +120,20 @@ public class Data {
 			
 			writeRand = true;
 			long start = System.nanoTime();
+			for(int execs = 0; execs < 10; execs++) {
+				long cnstart = System.nanoTime();
+				p = makeRandom(dim, 2500, out);
+				b.setPoints(p);
+				b.setDim(dim);
+				long cnstop = System.nanoTime();
+				start += cnstop-cnstart;
+				b.execute();
+			}
+			long end = System.nanoTime();
+			
+			out.print((int)(((double) end-start)/10) + ",");
+			
+			start = System.nanoTime();
 			for(int execs = 0; execs < 50; execs++) {
 				long cnstart = System.nanoTime();
 				p = makeRandom(dim, 2500, out);
@@ -129,7 +145,7 @@ public class Data {
 				kmaxavg += a.getkmax();
 				kavgavg += a.getkavg();
 			}
-			long end = System.nanoTime();
+			end = System.nanoTime();
 			
 			kmaxavg = kmaxavg / 50d;
 			kavgavg = kavgavg / 50d;
