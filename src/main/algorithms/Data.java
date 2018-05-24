@@ -19,7 +19,17 @@ import main.Main;
 public class Data {
 
 	public static void main(String[] args) {
-		ArrayList<Double[]> points = makeRandom(2, 10240);
+		
+		data1();
+		System.out.println("Data 1 done");
+		data2();
+		System.out.println("Data 2 done");
+		
+	}
+	
+	private static boolean writeRand = true;
+	
+	private static void data1() {
 		PrintWriter out = null;
 		try {
 			out = new PrintWriter(new BufferedWriter (new FileWriter("data1.csv")));
@@ -30,7 +40,7 @@ public class Data {
 		
 		AbstractAlg a = null;
 		
-		out.print("#Points,ExecSimple,ExecVar1\n");
+		out.print("#Points,sortTimeNano,ExecSimpleNano,ExecVar1Nano,Kmax,Kavg\n");
 		
 		for (int i = 250; i <= 13000; i*=1.1) {
 			List<Double[]> p = null;
@@ -38,10 +48,11 @@ public class Data {
 			
 			a = new SimpleAlg(p, 2, null);
 			
+			writeRand = true;
 			long start = System.nanoTime();
-			for(int execs = 0; execs < 20; execs++) {
+			for(int execs = 0; execs < 10; execs++) {
 				long cnstart = System.nanoTime();
-				p = makeRandom(2, i);
+				p = makeRandom(2, i, out);
 				a.setPoints(p);
 				long cnstop = System.nanoTime();
 				start += cnstop-cnstart;
@@ -49,14 +60,14 @@ public class Data {
 			}
 			long end = System.nanoTime();
 			
-			out.print((int)(((double) end-start)/15) + ",");
+			out.print((int)(((double) end-start)/10) + ",");
 			
 			a = new Variant1Alg(p, 2, null);
 			
 			start = System.nanoTime();
-			for(int execs = 0; execs < 200; execs++) {
+			for(int execs = 0; execs < 30; execs++) {
 				long cnstart = System.nanoTime();
-				p = makeRandom(2, i);
+				p = makeRandom(2, i, out);
 				a.setPoints(p);
 				long cnstop = System.nanoTime();
 				start += cnstop-cnstart;
@@ -64,16 +75,59 @@ public class Data {
 			}
 			end = System.nanoTime();
 			
-			out.print((int)(((double) end-start)/200) + "\n");
+			out.print((int)(((double) end-start)/30) + ",");
+			Variant1Alg b = (Variant1Alg) a;
+			out.print(b.getkmax() + "," + b.getkavg() + "\n");
+			System.out.println("Current points: " + i + " - " + p.size());
+			out.flush();
+		}
+		out.flush();
+		out.close();
+	}
+	
+	private static void data2() {
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(new BufferedWriter (new FileWriter("data2.csv")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		
+		Variant1Alg a = null;
+		
+		out.print("#Points,Dimension,ExecNano,Kmax,Kavg\n");
+		
+		List<Double[]> p = null;
+		for (int dim = 2; dim < 20; dim++) {
+			writeRand = false;
+			p = makeRandom(dim, 2500, out);
+			a = new Variant1Alg(p, dim, null);
 			
+			out.print("2500,"+dim + ",");
+			
+			writeRand = true;
+			long start = System.nanoTime();
+			for(int execs = 0; execs < 50; execs++) {
+				long cnstart = System.nanoTime();
+				p = makeRandom(dim, 2500, out);
+				a.setPoints(p);
+				a.setDim(dim);
+				long cnstop = System.nanoTime();
+				start += cnstop-cnstart;
+				a.execute();
+			}
+			long end = System.nanoTime();
+			out.print((int)(((double) end-start)/30) + ",");
+			out.print(a.getkmax() + "," + a.getkavg() + "\n");
+			System.out.println("current dim: " + dim);
 		}
 		
 		out.flush();
 		out.close();
-		
 	}
 	
-	private static ArrayList<Double[]> makeRandom(int dim, int size) {
+	private static ArrayList<Double[]> makeRandom(int dim, int size, PrintWriter out) {
 		ArrayList<Double[]> list = new ArrayList<Double[]>();
 		Random r = new Random();
 		Iterator<Double> i = r.doubles(size * dim, 0.0, 5.0).iterator();
@@ -85,7 +139,14 @@ public class Data {
 			}
 			list.add(point);
 		}
+		long start = System.nanoTime();
 		list.sort(new Main.PointSortComp(dim));
+		long end = System.nanoTime();
+		if (writeRand) {
+			out.print((end-start) + ",");
+			writeRand = false;
+		}
+		
 		return list;
 	}
 }

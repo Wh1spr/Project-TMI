@@ -21,6 +21,9 @@ public abstract class AbstractAlg {
 	public void setPoints(List<Double[]> points) {
 		this.points = points;
 	}
+	public void setDim(int dim) {
+		this.dim = dim;
+	}
 	
 	public List<Double[]> getPoints() {
 		return this.points;
