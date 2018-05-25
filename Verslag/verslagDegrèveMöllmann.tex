@@ -114,16 +114,16 @@ De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 
 \subsubsection{rekencomplexiteit}
 
-We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan O(N*Kgem).
-We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over N-1 punten.
+We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan $O(N*Kgem)$.
+We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over $N-1$ punten.
 Voor elk van die punten zullen we dus de afstand bepalen van de punten die binnen de verticale strook V.
-Indien we het Kgem bepalen (uitgemiddeld over i = 1,...,N) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
-We rekenen bij Kgem ook het eerste element bij die een K zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
-We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan O(N*Kgem).
+Indien we het $K_{gem}$ bepalen (uitgemiddeld over $i = 1,...,N$) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
+We rekenen bij $K_{gem}$ ook het eerste element bij die een $K$ zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
+We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan $O(N*Kgem)$.
 
 \subsection{worst-case puntenverzameling}
 
-Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor M = 2 hebben we een javafunctie \texttt{makeWorstCase}.
+Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor $M = 2$ hebben we een javafunctie \texttt{makeWorstCase}.
 In deze functie maken een puntenverzameling aan van één kolom, waarbij alle punten dezelfde x-waarde hebben.
 De y-waarde speelt hierbij geen rol.
 In onze rij-implementatie sorteren we de punten met dezelfde x-waarden volgens de y-waarde.
@@ -131,11 +131,11 @@ Het tweede punt zal dus enkel vergelijken met het punt boven hem.
 Het derde punt zal nadien vergelijken met het eerste en het tweede punt.
 Uiteindelijk zal het laatste (onderste) punt zal dus met alle punten vergelijken.
 Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De rekencomplexiteit zal dus $O(n^2)$ zijn.
-Voor Kavg kunnen we concluderen dat per N het aantal kavg voor de worst-case gelijk zal zijn aan N-1/2.
+Voor Kavg kunnen we concluderen dat per N het aantal kavg voor de worst-case gelijk zal zijn aan $\frac{N-1}{2}$.
 Kavg zal dus voor de worst-case in 2 dimesies een stijgend karakter hebben, wat in tegenstelling is tot willekeurige puntenverzamelingen in 2 dimensies (zie figuur 3).
 Dat is ook logisch. We hebben daarnet geconcludeerd dat de rekentijd van variant 1 van de worst-case zal toenemen in verband met het aantal punten.
-De rekencomplexiteit is gelijk aan (N*Kavg), hieruit kunnen we zien dat voor een stijgende rekencomplexiteit we ook een stijgende Kavg nodig zullen hebben.
-Kmax zal ook een stijgend karakter hebben. We kunne afleiden dat voor iedere N de Kmax steeds gelijk zal zijn aan N-1.
+De rekencomplexiteit is gelijk aan $(N*K_{avg})$, hieruit kunnen we zien dat voor een stijgende rekencomplexiteit we ook een stijgende Kavg nodig zullen hebben.
+Kmax zal ook een stijgend karakter hebben. We kunne afleiden dat voor iedere N de Kmax steeds gelijk zal zijn aan $N-1$.
 Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand berekenen met alle vorige punten.
 
 
@@ -150,8 +150,26 @@ Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand
 	\STATE $dpp1$ = 0, $dpp2$ = 0
 	\STATE $currentDist$ = 0
 	\STATE $t$: gegevensstructuur waarin punten links van de doorlooplijn opgeslagen zijn, gesorteerd naar stijgende y-coordinaat
-
-
+  \FOR {$i = 1$ to $length(rij)-1$}
+    \STATE voegtoe($t, rij[i-1]$)
+    \STATE $low = rij[i]$
+    \STATE $low.y = low.y - d$
+    \STATE $next = boven(t,low)$
+    \WHILE {$next \neq Null \textrm{ AND } next.y < rij[i].y + d$}
+      \IF {$next.x < rij[i].x - d$}
+        \STATE verwijder($t, next$)
+        \STATE $next = boven(t,next)$
+        \STATE $continue$
+      \ENDIF
+      \STATE $currentDist$ = calculate\_dist($rij[i]$, $next$)
+  	  \IF {$currentDist < d$}
+  			\STATE $dpp1$ = $rij[i]$
+  			\STATE $dpp2$ = $next$
+  			\STATE $d$ = $currentDist$
+  		\ENDIF
+      \STATE $next = boven(t,next)$
+    \ENDWHILE
+  \ENDFOR
 \end{algorithmic}
 \end{algorithm}
 
