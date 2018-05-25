@@ -112,14 +112,11 @@ De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{rekencomplexiteit}
-
-We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan $O(N*Kgem)$.
-We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over $N-1$ punten.
-Voor elk van die punten zullen we dus de afstand bepalen van de punten die binnen de verticale strook V.
-Indien we het $K_{gem}$ bepalen (uitgemiddeld over $i = 1,...,N$) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
-We rekenen bij $K_{gem}$ ook het eerste element bij die een $K$ zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
-We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan $O(N*Kgem)$.
+\subsection{Opmerking}
+Als we tijdens de behandeling van $p_i$ tegenkomen dat buiten de verticale
+strook V ligt, heeft het zin om dit punt uit de zoekboom te verwijderen. Deze bewerking neemt
+$O(logK)$ elementaire operaties in beslag, en kan voor iedere keer dat het punt nogmaals in de horizontale strook terecht komt $O(logK)$ elementaire operaties (voor het zoeken) besparen. Door het verwijderen van deze elementen wordt $K_{gem}$ ook veel kleiner, en dus worden er minder \textit{boven} en \textit{onder} bewerkingen uitgevoerd. \\
+Het is niet nodig, maar zal het aantal bewerkingen wel verminderen.
 
 \subsection{worst-case puntenverzameling}
 
