@@ -18,7 +18,7 @@
 
 \section{Beschrijving van opstelling van puntenverzameling}
 Voor het opstellen van een input-file met een aantal gegeven parameters om willekeurge punten te creëren gebruiken we de functie "makeRandom".
-Deze functiezal de volgende parameters als input vragen:
+Deze functie zal de volgende parameters als input vragen:
 \begin{enumerate}
     \item inFile: De puntenverzameling zal in dit bestand weggeschreven worden, indien het bestand niet bestaat zal het aangemaakt worden.
     \item alg: het nummer van het algoritme dat gebruikt moet worden: 1 (eenvoudige algoritme), 2 (eerste variante van het doorlooplijnalgoritme) of 3 (tweede variante van het doorlooplijnalgoritme)
@@ -94,9 +94,8 @@ Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De complexiteit
 \end{algorithm}
 
 \newpage
-\subsection{Variant 1 algorithm}
+\subsection{Variant 1 algoritme}
 \subsubsection{hoogniveau beschrijving}
-
 
 \begin{algorithm}
 \caption{Bereken het dichtste Puntenpaar volgens variant 1}
@@ -122,6 +121,15 @@ Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De complexiteit
 \end{algorithmic}
 \end{algorithm}
 
+\subsubsection{rekencomplexiteit}
+
+We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan O(N*Kgem).
+We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over N-1 punten.
+Voor elk van die punten zullen we dus de afstand bepalen van de punten die binnen de verticale strook V.
+Indien we het Kgem bepalen (uitgemiddeld over i=1,...,N) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
+We rekenen bij Kgem ook het eerste element bij die een K zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
+We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan O(N*Kgem).
+
 \subsection{Variant 2 algorithm}
 \subsubsection{hoogniveau beschrijving}
 
@@ -139,6 +147,11 @@ Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De complexiteit
 \end{algorithm}
 
 \section{Grafieken}
+
+\subsection{veronderstelling}
+Indien we spreken over rekencomplexiteit bedoelen we de complexiteit van het algoritme zonder de rekentijd van het sorteren van de input.
+Bij tijdscomplexiteit maken we de som tussen rekentijd van het sorteren en de rekentijd van het algoritme zelf.
+
 
 In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant1 vergelijken.
 We zullen op de x-as het aantal punten uitzetten.
@@ -181,7 +194,12 @@ In ons experiment was deze constante rond 1,35.
 In Figuur 4 zullen we de het aantal dimensies plotten in functie van de rekentijd voor variant 1.
 We zullen op de x-as het aantal dimensies uitzetten van 2 tot en met 19.
 Op de y-as zetten we de rekentijd uit in milliseconden.
-
+We zien duidelijk dat voor een stijgende M gaat het voordeel van het doorlooplijn verloren.
+Dit kunnen we eenvoudig bepalen aan de hand van de rekencomplexiteit en figuur 5.
+In figuur 5 zien we dat Kavg een lineair verband heeft met het aantal dimensies.
+We weten ook dat de rekencomplexiteit van variant 1 gelijk is aan O(N*Kavg).
+Hierdoor kunnen we dus afleiden dat de rekencomplexiteit ook zal stijgen in functie het aantal dimensies.
+\\TODO Waarom? Voor welke waarde van M is er geen voordeel meer? Waarom?
 
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
