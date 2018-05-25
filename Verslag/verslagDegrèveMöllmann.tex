@@ -244,20 +244,21 @@ We kunnen dus zeggen dat vanaf 3 dimensies de efficiëntie van het algoritme al 
 
 \subsection{figuur 5 en figuur 6}
 
-In figuur 5 zullen we het aantal dimensies plotten met de rekentijd van variant 1 voor 2500 punten.
+In figuur 5 zullen we het verband tussen de $K_{avg}$ en het aantal dimensies plotten.
+Op de x-as zetten we het aantal dimensies uit van 2 tot 19.
+Op de y-as zetten we de $K_{avg}$ uit.
+Op deze plot is duidelijk te herkennen dat $K_{avg}$ een positief lineair verband heeft met het aantal dimensies.
+Dit zal invloed hebben op de rekentijd van variant 1 voor hogere dimensies.
+In figuur 6 zullen we het aantal dimensies plotten met de rekentijd van variant 1 voor 2500 punten.
 We zullen op de x-as het aantal dimensies uitzetten van 2 tot en met 19.
 Op de y-as zetten we de rekentijd uit in milliseconden.
-We zien duidelijk dat voor een stijgende M gaat het voordeel van het doorlooplijn verloren.
-Dit kunnen we eenvoudig bepalen aan de hand van de rekencomplexiteit en figuur 5.
-We weten ook dat de rekencomplexiteit van variant 1 gelijk is aan O(N*Kavg).
-Hierdoor kunnen we dus afleiden dat de rekencomplexiteit ook zal stijgen in functie het aantal dimensies.
-\\TODO Waarom? Voor welke waarde van M is er geen voordeel meer? Waarom?
+We zien in figuur 6 ook dat voor hogere dimensies het voordeel van een doorlooplijn verloren gaat.
+we kunnen dit ook afleiden uit figuur 5 en de rekencomplexiteit van variant 1, namelijk $O(N*K_{avg})$.
+Omdat $K_{avg}$ een positief lineair verband heeft met het aantal dimensies zal ook de rekentijd in hogere dimensies een positiefe trend vertonen.
 
-
-In figuur 6 zullen we het verband tussen de Kavg en het aantal dimensies plotten.
-Op de x-as zetten we het aantal dimensies uit van 2 tot 19.
-Op de y-as zetten we de Kavg uit.
-Op deze plot is duidelijk te herkennen dat Kavg een positief lineair verband heeft.
+In figuur 3 en 4 kunnen we al zien dat bij dimensie 2 $K_{avg}$ ongeveer constant blijft, terwijl bij dimensie 3 er een positief verband is tussen $K_{avg}$ en het aantal punten.
+Hierbij gaat een deel van het voordeel verloren, maar het is nog steeds beter dan het \textit{brute-force} algoritme, omdat we nog steeds uit 1 dimensie 'selecteren' voor de verticale strook.
+Het voordeel zal er dus altijd zijn, t.o.v. \textit{brute-force}, maar zal veel kleiner worden voor stijgende M.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
