@@ -17,7 +17,7 @@
 \newpage
 
 \section{Beschrijving van opstelling van puntenverzameling}
-Voor het opstellen van een input-file met een aantal gegeven parameters om willekeurge punten te creëren gebruiken we de functie "makeRandom".
+Voor het opstellen van een input-file met een aantal gegeven parameters om willekeurge punten te creëren gebruiken we de functie \texttt{makeRandom}.
 Deze functie zal de volgende parameters als input vragen:
 \begin{enumerate}
     \item inFile: De puntenverzameling zal in dit bestand weggeschreven worden, indien het bestand niet bestaat zal het aangemaakt worden.
@@ -26,7 +26,7 @@ Deze functie zal de volgende parameters als input vragen:
 		\item size: het aantal punten N
 \end{enumerate}
 
-Deze functie heeft als taak om een inputbestand op te stellen met willekeurge co\"ordinaten.
+Deze functie heeft als taak om een inputbestand op te stellen met willekeurige co\"ordinaten.
 De functie zal de gegeven parameters eerst neerschrijven in de inFile.
 Daarna gebeurd een initialisatie van \texttt{Random r}.
 Daarna zullen we per regel van het bestand itereren van 0 tot en met de dimensie en voor iedere dimensie een willekeurige waarde neerschrijven in het bestand.
@@ -117,25 +117,24 @@ De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 \subsubsection{rekencomplexiteit}
 We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan $O(N*Kgem)$.
 We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over $N-1$ punten.
-Voor elk van die punten zullen we dus de afstand bepalen van de punten die binnen de verticale strook V.
-Indien we het $K_{gem}$ bepalen (uitgemiddeld over $i = 1,...,N$) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
+Voor elk van die punten zullen we dus de afstand bepalen voor de punten die binnen de verticale strook V liggen.
+Indien we $K_{gem}$ bepalen (uitgemiddeld over $i = 1,...,N$) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
 We rekenen bij $K_{gem}$ ook het eerste element bij die een $K$ zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
 We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan $O(N*Kgem)$.
 
 \subsubsection{worst-case puntenverzameling}
-Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor $M = 2$ hebben we een javafunctie \texttt{makeWorstCase}.
-In deze functie maken een puntenverzameling aan van één kolom, waarbij alle punten dezelfde x-waarde hebben.
-De y-waarde speelt hierbij geen rol.
+De \textit{worst-case} voor dimensie 2 speelt zich af wanneer de puntenverzameling zich op één kolom bevindt.
+Hierbij hebben alle punten dezelfde x-waarde, en heeft de y-waarde geen invloed.
 In onze rij-implementatie sorteren we de punten met dezelfde x-waarden volgens de y-waarde.
-Het tweede punt zal dus enkel vergelijken met het punt boven hem.
-Het derde punt zal nadien vergelijken met het eerste en het tweede punt.
+Het tweede punt zal dus enkel vergeleken worden met het punt boven hem.
+Het derde punt zal nadien vergeleken worden met het eerste en het tweede punt.
 Uiteindelijk zal het laatste (onderste) punt zal dus met alle punten vergelijken.
-Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De rekencomplexiteit zal dus $O(n^2)$ zijn.
-Voor Kavg kunnen we concluderen dat per N het aantal kavg voor de worst-case gelijk zal zijn aan $\frac{N-1}{2}$.
-Kavg zal dus voor de worst-case in 2 dimesies een stijgend karakter hebben, wat in tegenstelling is tot willekeurige puntenverzamelingen in 2 dimensies (zie figuur 3).
+Dit zal ons uiteindelijk $\frac{N(N+1)}{2}$ vergelijkingen geven. De rekencomplexiteit zal dus $O(n^2)$ zijn.
+Voor $K_{avg}$ kunnen we concluderen dat per N het aantal kavg voor de worst-case gelijk zal zijn aan $\frac{N-1}{2}$.
+Kavg zal dus voor de worst-case in 2 dimensies een stijgend karakter hebben, wat in tegenstelling is tot willekeurige puntenverzamelingen in 2 dimensies (zie figuur 3).
 Dat is ook logisch. We hebben daarnet geconcludeerd dat de rekentijd van variant 1 van de worst-case zal toenemen in verband met het aantal punten.
-De rekencomplexiteit is gelijk aan $(N*K_{avg})$, hieruit kunnen we zien dat voor een stijgende rekencomplexiteit we ook een stijgende Kavg nodig zullen hebben.
-Kmax zal ook een stijgend karakter hebben. We kunne afleiden dat voor iedere N de Kmax steeds gelijk zal zijn aan $N-1$.
+De rekencomplexiteit is gelijk aan $(N*K_{avg})$, hieruit kunnen we zien dat voor een stijgende rekencomplexiteit we ook een stijgende $K_{avg}$ nodig zullen hebben.
+$K_{max}$ zal ook een stijgend karakter hebben. We kunne afleiden dat voor iedere $N$ de $K_{max}$ steeds gelijk zal zijn aan $N-1$.
 Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand berekenen met alle vorige punten.
 
 \newpage
@@ -176,7 +175,7 @@ Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand
 \subsubsection{Opmerking}
 Als we tijdens de behandeling van $p_i$ tegenkomen dat buiten de verticale
 strook V ligt, heeft het zin om dit punt uit de zoekboom te verwijderen. Deze bewerking neemt
-$O(logK)$ elementaire operaties in beslag, en kan voor iedere keer dat het punt nogmaals in de horizontale strook terecht komt $O(logK)$ elementaire operaties (voor het zoeken) besparen. Door het verwijderen van deze elementen wordt $K_{gem}$ ook veel kleiner, en dus worden er minder \textit{boven} en \textit{onder} bewerkingen uitgevoerd. \\
+$O(logK)$ elementaire operaties in beslag, en kan voor iedere keer dat het punt nogmaals in de horizontale strook terecht komt $O(logK)$ elementaire operaties (voor het zoeken) besparen. Door het verwijderen van deze elementen wordt $K_{gem}$ ook veel kleiner, en dus worden er minder \textit{boven()} en \textit{onder()} bewerkingen uitgevoerd. \\
 Het is niet nodig, maar zal het aantal bewerkingen wel verminderen.
 
 \section{Grafieken}
@@ -184,7 +183,6 @@ Het is niet nodig, maar zal het aantal bewerkingen wel verminderen.
 
 \subsection{veronderstelling}
 Indien we spreken over rekencomplexiteit bedoelen we de complexiteit van het algoritme zonder de rekentijd van het sorteren van de input.
-Bij tijdscomplexiteit maken we de som tussen rekentijd van het sorteren en de rekentijd van het algoritme zelf.
 
 \subsection{figuur 1}
 In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant 1 vergelijken.
@@ -213,7 +211,7 @@ In figuur 4 zullen we het verband tussen de $K_{avg}$ en het aantal punten plott
 Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis $1.1$.
 Op de y-as zetten we de $K_{avg}$ uit.
 Op deze plot zien we een groot contrast als we vergelijken met figuur 3.
-Terwijl wij bij figuur 3 spraken van een een relatief kleine Kavg voor een willekeurge aantal punten, hebben we hier een positief lineair verband.
+Terwijl wij bij figuur 3 spraken van een een relatief kleine $K_{avg}$ voor een willekeurge aantal punten, hebben we hier een positief lineair verband.
 We zullen in drie dimensies significant meer afstanden moeten berekenen dan in twee dimensies.
 We kunnen dus zeggen dat vanaf 3 dimensies de efficiëntie van het algoritme al zal afnemen.
 
