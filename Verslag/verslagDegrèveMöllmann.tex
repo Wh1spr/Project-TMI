@@ -201,7 +201,7 @@ We kunnen ook zien dat de het brute-force algoritme een steiler verloop heeft, h
 
 \subsection{figuur 2}
 
-In figuur 2 zullen we het verband tussen de Kmax en het aantal punten plotten.
+In figuur 2 zullen we het verband tussen de Kmax en het aantal punten plotten voor 2 dimensies.
 Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1,1.
 Op de y-as zetten we de Kmax uit die in dit geval zal gaan van een minimum van 2 tot en met een maximum van 25.
 We kunnen op de plot zien dat de grafiek Kmax een licht stijgend karakter heeft.
@@ -212,25 +212,22 @@ We kunnen wel zien dat steeds Kmax relatief klein zal blijven ten opzichte van h
 \caption{De plot tussen het aantal punten en Kmax voor 2 dimensies}
 \end{figure}
 
-\subsection{figuur 3,4 en 5}
+\subsection{figuur 3 en 4}
 
-In figuur 3 zullen we het verband tussen de Kavg en het aantal punten plotten.
+In figuur 3 zullen we het verband tussen de Kavg en het aantal punten plotten voor 2 dimensies.
 Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1.1.
 Op de y-as zetten we de Kmax uit die in dit geval zal gaan van een minimum van 0,1480 tot en met een maximum van 2,14186.
 Op deze plot is duidelijk te herkennen dat Kavg ongeveer constant zal blijven ongeacht het aantal punten.
 In ons experiment was deze constante 1,35.
 We kunnen concluderen dat voor willekeurige puntenverzameling in 2 dimensies de Kavg zeer klein zal zijn in vergelijkign met N.
 
-In Figuur 4 zullen we de het aantal dimensies plotten in functie van de rekentijd voor variant 1.
-We zullen op de x-as het aantal dimensies uitzetten van 2 tot en met 19.
-Op de y-as zetten we de rekentijd uit in milliseconden.
-We zien duidelijk dat voor een stijgende M gaat het voordeel van het doorlooplijn verloren.
-Dit kunnen we eenvoudig bepalen aan de hand van de rekencomplexiteit en figuur 5.
 
-In figuur 5 zien we dat Kavg een lineair verband heeft met het aantal dimensies.
-We weten ook dat de rekencomplexiteit van variant 1 gelijk is aan O(N*Kavg).
-Hierdoor kunnen we dus afleiden dat de rekencomplexiteit ook zal stijgen in functie het aantal dimensies.
-\\TODO Waarom? Voor welke waarde van M is er geen voordeel meer? Waarom?
+
+In figuur 4 zullen we het verband tussen de Kavg en het aantal punten plotten voor 3 dimensies.
+
+
+
+
 
 \begin{figure}
 \includegraphics[width=\textwidth]{punten-Kavg}
@@ -242,22 +239,29 @@ Hierdoor kunnen we dus afleiden dat de rekencomplexiteit ook zal stijgen in func
 \caption{De plot tussen het aantal punten en Kavg voor 3 dimensies}
 \end{figure}
 
-\begin{figure}
-\includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
-\caption{De plot tussen het aantal dimensies en de rekentijd van variant 1 (voor 2500 punten)}
-\end{figure}
 
-\subsection{figuur 6}
+
+\subsection{figuur 5 en figuur 6}
+
+In figuur 5 zullen we het aantal dimensies plotten met de rekentijd van variant 1 voor 2500 punten.
+We zullen op de x-as het aantal dimensies uitzetten van 2 tot en met 19.
+Op de y-as zetten we de rekentijd uit in milliseconden.
+We zien duidelijk dat voor een stijgende M gaat het voordeel van het doorlooplijn verloren.
+Dit kunnen we eenvoudig bepalen aan de hand van de rekencomplexiteit en figuur 5.
+We weten ook dat de rekencomplexiteit van variant 1 gelijk is aan O(N*Kavg).
+Hierdoor kunnen we dus afleiden dat de rekencomplexiteit ook zal stijgen in functie het aantal dimensies.
+\\TODO Waarom? Voor welke waarde van M is er geen voordeel meer? Waarom?
+
 
 In figuur 6 zullen we het verband tussen de Kavg en het aantal dimensies plotten.
 Op de x-as zetten we het aantal dimensies uit van 2 tot 19.
 Op de y-as zetten we de Kavg uit.
-Op deze plot is duidelijk te herkennen dat Kavg ongeveer constant zal blijven ongeacht het aantal punten.
-In ons experiment was deze constante 1,35.
-We kunnen concluderen dat voor willekeurige puntenverzameling in 2 dimensies de Kavg zeer klein zal zijn in vergelijkign met N.
+Op deze plot is duidelijk te herkennen dat Kavg een positief lineair verband heeft.
 
-
-
+\begin{figure}
+\includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
+\caption{De plot tussen het aantal dimensies en de rekentijd van variant 1 (voor 2500 punten)}
+\end{figure}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-Kavg.png}
@@ -266,7 +270,7 @@ We kunnen concluderen dat voor willekeurige puntenverzameling in 2 dimensies de 
 
 \subsection{figuur 7}
 
-
+In figuur 7 zullen we het verband tussen het aantal dimensies en Kmax plotten.
 
 
 
