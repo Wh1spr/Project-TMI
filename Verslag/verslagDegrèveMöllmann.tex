@@ -171,79 +171,52 @@ Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand
 \end{algorithm}
 
 \subsection{rekencomplexiteit}
-De behandeling van ieder punt p zal gemiddeld O(logN) bewerkingen nodig hebben.
+De behandeling van ieder punt p zal gemiddeld $O(logN)$ bewerkingen nodig hebben.
 We maken bij onze variant 2 gebruik van een gebalanceerde zoekboom.
-We weten dat alle nodige bewerkingen in O(logK) operaties kunnen uitgevoerd worden in de boom.
+We weten dat alle nodige bewerkingen in $O(logK)$ operaties kunnen uitgevoerd worden in de boom.
 Het algoritme voegt bij elke iteratie het punt dat we aan het behandelen zijn toe aan de boom.
 Bij de behandeling van het laatste punt zullen we alle punten toegevoegd hebben aan de boom.
-Voor het laatste punt zal dus elke bewerking log(N) tijd kosten.
-
-
+Voor het laatste punt zal dus elke bewerking $log(N)$ tijd kosten.
 
 \section{Grafieken}
+\textit{Alle grafieken zijn achteraan te vinden.}
 
 \subsection{veronderstelling}
 Indien we spreken over rekencomplexiteit bedoelen we de complexiteit van het algoritme zonder de rekentijd van het sorteren van de input.
 Bij tijdscomplexiteit maken we de som tussen rekentijd van het sorteren en de rekentijd van het algoritme zelf.
 
 \subsection{figuur 1}
-In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant1 vergelijken.
+In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant 1 vergelijken.
 We zullen op de x-as het aantal punten uitzetten.
-De gekozen aantal punten zijn logaritmisch bepaald met als basis 1.1 beginnend vanaf 302 tot en met 12279.
-Op de y-as zetten we de rekentijd uit in milliseconden. Hiervoor gebruiken we een logaritmische functie met basis 2.
-We kunnen concluderen uit deze plot dat variant 1 voor alle onze gekozen punten een effeciënter algoritme is.
-We kunnen ook zien dat de het brute-force algoritme een steiler verloop heeft, hieruit kunnen we afleiden dat voor zeer grote aantallen punten het verschil tussen de twee algoritmes steeds groter zal worden.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{Simpel-var1-rekentijd.png}
-\caption{De plot van de rekentijden tussen het brute-force algoritme en variant 1 voor 2 dimensies}
-\end{figure}
+De gekozen aantal punten zijn logaritmisch bepaald met als basis $1.1$ beginnend vanaf 302 tot en met 12279.
+Op de y-as zetten we de rekentijd uit in milliseconden. Hiervoor gebruiken we een logaritmische functie met basis $2$.
+We kunnen concluderen uit deze plot dat variant 1 voor alle onze gekozen punten een efficiënter algoritme is.
+We kunnen ook zien dat de het \textit{brute-force} algoritme een steiler verloop heeft, hieruit kunnen we afleiden dat voor zeer grote aantallen punten het verschil tussen de twee algoritmes steeds groter zal worden.
 
 \subsection{figuur 2}
-
-In figuur 2 zullen we het verband tussen de Kmax en het aantal punten plotten voor 2 dimensies.
-Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1,1.
-Op de y-as zetten we de Kmax uit die in dit geval zal gaan van een minimum van 2 tot en met een maximum van 25.
-We kunnen op de plot zien dat de grafiek Kmax een licht stijgend karakter heeft.
-We kunnen wel zien dat steeds Kmax relatief klein zal blijven ten opzichte van het aantal punten.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{punten-Kmax.png}
-\caption{De plot tussen het aantal punten en Kmax voor 2 dimensies}
-\end{figure}
-
+In figuur 2 zullen we het verband tussen de $K_{max}$ en het aantal punten plotten voor 2 dimensies.
+Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis $1.1$.
+Op de y-as zetten we de $K_{max}$ uit die in dit geval zal gaan van een minimum van 2 tot en met een maximum van 25.
+We kunnen op de plot zien dat de grafiek $K_{max}$ een licht stijgend karakter heeft.
+We kunnen wel zien dat steeds $K_{max}$ relatief klein zal blijven ten opzichte van het aantal punten.
+\newpage
 \subsection{figuur 3 en 4}
+In figuur 3 zullen we het verband tussen de $K_{avg}$ en het aantal punten plotten voor 2 dimensies.
+Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis $1.1$.
+Op de y-as zetten we de $K_{avg}$ uit.
+Op deze plot is duidelijk te herkennen dat $K_{avg}$ ongeveer constant zal blijven ongeacht het aantal punten.
+In ons experiment was deze constante $1.35$.
+We kunnen concluderen dat voor willekeurige puntenverzameling in 2 dimensies de $K_{avg}$ zeer klein zal zijn in vergelijkign met $N$.
 
-In figuur 3 zullen we het verband tussen de Kavg en het aantal punten plotten voor 2 dimensies.
-Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1.1.
-Op de y-as zetten we de Kavg uit.
-Op deze plot is duidelijk te herkennen dat Kavg ongeveer constant zal blijven ongeacht het aantal punten.
-In ons experiment was deze constante 1,35.
-We kunnen concluderen dat voor willekeurige puntenverzameling in 2 dimensies de Kavg zeer klein zal zijn in vergelijkign met N.
-
-In figuur 4 zullen we het verband tussen de Kavg en het aantal punten plotten voor 3 dimensies.
-Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1.1.
-Op de y-as zetten we de Kavg uit.
+In figuur 4 zullen we het verband tussen de $K_{avg}$ en het aantal punten plotten voor 3 dimensies.
+Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis $1.1$.
+Op de y-as zetten we de $K_{avg}$ uit.
 Op deze plot zien we een groot contrast als we vergelijken met figuur 3.
 Terwijl wij bij figuur 3 spraken van een een relatief kleine Kavg voor een willekeurge aantal punten, hebben we hier een positief lineair verband.
 We zullen in drie dimensies significant meer afstanden moeten berekenen dan in twee dimensies.
 We kunnen dus zeggen dat vanaf 3 dimensies de efficiëntie van het algoritme al zal afnemen.
 
-
-\begin{figure}
-\includegraphics[width=\textwidth]{punten-Kavg}
-\caption{De plot tussen het aantal punten en Kavg voor 2 dimensies}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=\textwidth]{punten-Kavgdim3.png}
-\caption{De plot tussen het aantal punten en Kavg voor 3 dimensies}
-\end{figure}
-
-
-
 \subsection{figuur 5 en figuur 6}
-
 In figuur 5 zullen we het verband tussen de $K_{avg}$ en het aantal dimensies plotten.
 Op de x-as zetten we het aantal dimensies uit van 2 tot 19.
 Op de y-as zetten we de $K_{avg}$ uit.
@@ -256,9 +229,38 @@ We zien in figuur 6 ook dat voor hogere dimensies het voordeel van een doorloopl
 we kunnen dit ook afleiden uit figuur 5 en de rekencomplexiteit van variant 1, namelijk $O(N*K_{avg})$.
 Omdat $K_{avg}$ een positief lineair verband heeft met het aantal dimensies zal ook de rekentijd in hogere dimensies een positiefe trend vertonen.
 
+\newpage
 In figuur 3 en 4 kunnen we al zien dat bij dimensie 2 $K_{avg}$ ongeveer constant blijft, terwijl bij dimensie 3 er een positief verband is tussen $K_{avg}$ en het aantal punten.
 Hierbij gaat een deel van het voordeel verloren, maar het is nog steeds beter dan het \textit{brute-force} algoritme, omdat we nog steeds uit 1 dimensie 'selecteren' voor de verticale strook.
 Het voordeel zal er dus altijd zijn, t.o.v. \textit{brute-force}, maar zal veel kleiner worden voor stijgende M.
+
+\subsection{figuur 7}
+In figuur 7 zullen we het verband tussen het aantal dimensies en $K_{max}$ plotten.
+Op de x-as zetten we het aantal dimensies uit van 2 tot 19.
+Op de y-as zetten we de $K_{max}$ uit.
+We kunnen een duidelijk positief lineair verband tussen $K_{max}$ en het aantal dimensies waarnemen.
+
+\newpage
+
+\begin{figure}
+\includegraphics[width=\textwidth]{Simpel-var1-rekentijd.png}
+\caption{De plot van de rekentijden tussen het brute-force algoritme en variant 1 voor 2 dimensies}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{punten-Kmax.png}
+\caption{De plot tussen het aantal punten en Kmax voor 2 dimensies}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{punten-Kavg}
+\caption{De plot tussen het aantal punten en Kavg voor 2 dimensies}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{punten-Kavgdim3.png}
+\caption{De plot tussen het aantal punten en Kavg voor 3 dimensies}
+\end{figure}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-var1-rekentijd.png}
@@ -270,18 +272,8 @@ Het voordeel zal er dus altijd zijn, t.o.v. \textit{brute-force}, maar zal veel 
 \caption{De plot tussen het aantal dimensies en Kavg (voor 2500 punten)}
 \end{figure}
 
-\subsection{figuur 7}
-
-In figuur 7 zullen we het verband tussen het aantal dimensies en Kmax plotten.
-Op de x-as zetten we het aantal dimensies uit van 2 tot 19.
-Op de y-as zetten we de Kmax uit.
-We kunnen een duidelijk positief lineair verband tussen Kmax en het aantal dimensies waarnemen.
-
 \begin{figure}
 \includegraphics[width=\textwidth]{dim-Kmax.png}
 \caption{De plot tussen het aantal dimensies en Kmax (voor 2500 punten)}
 \end{figure}
-
-
-
 \end{document}
