@@ -32,15 +32,6 @@ Daarna gebeurd een initialisatie van \texttt{Random r}.
 Daarna zullen we per regel van het bestand itereren van 0 tot en met de dimensie en voor iedere dimensie een willekeurige waarde neerschrijven in het bestand.
 De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 
-Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor M = 2 hebben we een javafunctie \texttt{makeWorstCase}.
-In deze functie maken een puntenverzameling aan van één kolom, waarbij alle punten dezelfde x-waarde hebben.
-De y-waarde speelt hierbij geen rol.
-In onze rij-implementatie sorteren we de punten met dezelfde x-waarden volgens de y-waarde.
-Het tweede punt zal dus enkel vergelijken met het punt boven hem.
-Het derde punt zal nadien vergelijken met het eerste en het tweede punt.
-Uiteindelijk zal het laatste (onderste) punt zal dus met alle punten vergelijken.
-Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De complexiteit zal dus $O(n^2/2)$ zijn.
-
 
 \begin{algorithm}
 \caption{De javafunctie \texttt{makeRandom}}
@@ -130,6 +121,24 @@ Indien we het Kgem bepalen (uitgemiddeld over i = 1,...,N) zullen we een goede s
 We rekenen bij Kgem ook het eerste element bij die een K zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
 We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan O(N*Kgem).
 
+\subsection{worst-case puntenverzameling}
+
+Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor M = 2 hebben we een javafunctie \texttt{makeWorstCase}.
+In deze functie maken een puntenverzameling aan van één kolom, waarbij alle punten dezelfde x-waarde hebben.
+De y-waarde speelt hierbij geen rol.
+In onze rij-implementatie sorteren we de punten met dezelfde x-waarden volgens de y-waarde.
+Het tweede punt zal dus enkel vergelijken met het punt boven hem.
+Het derde punt zal nadien vergelijken met het eerste en het tweede punt.
+Uiteindelijk zal het laatste (onderste) punt zal dus met alle punten vergelijken.
+Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De rekencomplexiteit zal dus $O(n^2)$ zijn.
+Voor Kavg kunnen we concluderen dat per N het aantal kavg voor de worst-case gelijk zal zijn aan N-1/2.
+Kavg zal dus voor de worst-case in 2 dimesies een stijgend karakter hebben, wat in tegenstelling is tot willekeurige puntenverzamelingen in 2 dimensies (zie figuur 3).
+Dat is ook logisch. We hebben daarnet geconcludeerd dat de rekentijd van variant 1 van de worst-case zal toenemen in verband met het aantal punten.
+De rekencomplexiteit is gelijk aan (N*Kavg), hieruit kunnen we zien dat voor een stijgende rekencomplexiteit we ook een stijgende Kavg nodig zullen hebben.
+Kmax zal ook een stijgend karakter hebben. We kunne afleiden dat voor iedere N de Kmax steeds gelijk zal zijn aan N-1.
+Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand berekenen met alle vorige punten.
+
+
 \subsection{Variant 2 algorithm}
 \subsubsection{hoogniveau beschrijving}
 
@@ -146,38 +155,46 @@ We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn
 \end{algorithmic}
 \end{algorithm}
 
+\subsection{rekencomplexiteit}
+De behandeling van ieder punt p zal gemiddeld O(logN) bewerkingen nodig hebben.
+We maken bij onze variant 2 gebruik van een gebalanceerde zoekboom.
+We weten dat alle nodige bewerkingen in O(logK) operaties kunnen uitgevoerd worden in de boom.
+Het algoritme voegt bij elke iteratie het punt dat we aan het behandelen zijn toe aan de boom.
+Bij de behandeling van het laatste punt zullen we alle punten toegevoegd hebben aan de boom.
+Voor het laatste punt zal dus elke bewerking log(N) tijd kosten.
+
+
+
 \section{Grafieken}
 
 \subsection{veronderstelling}
 Indien we spreken over rekencomplexiteit bedoelen we de complexiteit van het algoritme zonder de rekentijd van het sorteren van de input.
 Bij tijdscomplexiteit maken we de som tussen rekentijd van het sorteren en de rekentijd van het algoritme zelf.
 
-
+\subsection{figuur 1}
 In Figuur 1 zullen we de rekentijden tussen het brute-force algoritme en variant1 vergelijken.
 We zullen op de x-as het aantal punten uitzetten.
-% Deze 302 komt eigenlijk omdat ik van 250 ben begonnen -> 275 -> 302, maar onder 300 gaf was omdat
-% wel een beetje afwijkend van de verwachte rechte
 De gekozen aantal punten zijn logaritmisch bepaald met als basis 1.1 beginnend vanaf 302 tot en met 12279.
-% TODO Waarom gekozen voor log met b=1.1 => Echt puur voor meer datapunten te hebben zonder dat ik uren moet wachten
 Op de y-as zetten we de rekentijd uit in milliseconden. Hiervoor gebruiken we een logaritmische functie met basis 2.
-% TODO wel verband precies kunnen we concluderen (lineair, expo, ...)
-% Goeie vraag, ze lijken allebei FACTOR * N^2 te zijn niet? met die base 2 voor het logaritme?
 We kunnen concluderen uit deze plot dat variant 1 voor alle onze gekozen punten een effeciënter algoritme is.
-We kunnen ook zien dat de het brute-force algoritme een steiler verloop heeft, hieruit kunnen we afleiden dat voor zeer grote aantallen punten het verschil tussen de twee algoritmes steeds groter worden.
+We kunnen ook zien dat de het brute-force algoritme een steiler verloop heeft, hieruit kunnen we afleiden dat voor zeer grote aantallen punten het verschil tussen de twee algoritmes steeds groter zal worden.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Simpel-var1-rekentijd.png}
 \caption{De plot van de rekentijden tussen het brute-force algoritme en variant 1}
 \end{figure}
 
+\subsection{figuur 2}
+
 In figuur 2 zullen we het verband tussen de Kmax en het aantal punten plotten.
 Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis 1,1.
 Op de y-as zetten we de Kmax uit die in dit geval zal gaan van een minimum van 2 tot en met een maximum van 25.
 We kunnen op de plot zien dat de grafiek Kmax een licht stijgend karakter heeft.
+Hieruit kunnen we concluderen dat voor een groot aantal punten de Kmax ook zal evalueren
 
 \begin{figure}
 \includegraphics[width=\textwidth]{punten-Kmax.png}
-\caption{De plot tussen het aantal punten en Kmax}
+\caption{De plot tussen het aantal punten en Kmax voor 2 dimensies}
 \end{figure}
 
 In figuur 3 zullen we het verband tussen de Kavg en het aantal punten plotten.
