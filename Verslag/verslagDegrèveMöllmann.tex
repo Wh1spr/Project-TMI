@@ -126,7 +126,7 @@ Dit zal ons uiteindelijk $\frac{(n+1)}{2}$ vergelijkingen geven. De complexiteit
 We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan O(N*Kgem).
 We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over N-1 punten.
 Voor elk van die punten zullen we dus de afstand bepalen van de punten die binnen de verticale strook V.
-Indien we het Kgem bepalen (uitgemiddeld over i=1,...,N) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
+Indien we het Kgem bepalen (uitgemiddeld over i = 1,...,N) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
 We rekenen bij Kgem ook het eerste element bij die een K zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
 We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan O(N*Kgem).
 
@@ -188,8 +188,14 @@ In ons experiment was deze constante rond 1,35.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{punten-Kavg}
-\caption{De plot tussen het aantal punten en Kavg}
+\caption{De plot tussen het aantal punten en Kavg voor 2 dimensies}
 \end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{punten-Kavgdim3.png}
+\caption{De plot tussen het aantal punten en Kavg voor 3 dimensies}
+\end{figure}
+
 
 In Figuur 4 zullen we de het aantal dimensies plotten in functie van de rekentijd voor variant 1.
 We zullen op de x-as het aantal dimensies uitzetten van 2 tot en met 19.
@@ -210,6 +216,13 @@ Hierdoor kunnen we dus afleiden dat de rekencomplexiteit ook zal stijgen in func
 \includegraphics[width=\textwidth]{dim-Kavg.png}
 \caption{De plot tussen het aantal dimensies en Kavg (voor 2500 punten)}
 \end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{dim-Kmax.png}
+\caption{De plot tussen het aantal dimensies en Kmax (voor 2500 punten)}
+\end{figure}
+
+
 
 
 
