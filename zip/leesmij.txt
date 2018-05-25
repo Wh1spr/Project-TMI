@@ -1,0 +1,41 @@
+1. STANDAARD UITVOERING
+2. GERANDOMISEERDE INPUT MET UITVOERING
+3. GERANDOMISEERDE INPUT ZONDER UITVOERING
+4. SNELLE EN GEMAKKELIJKE UITVOERING
+==========================================
+
+1. STANDAARD UITVOERING
+
+Om het bestand uit te voeren, ga naar Terminal/cmd en voer volgend commando uit:
+
+	java -jar toepMeetk.jar <input> <output>
+
+waarbij <input> het pad is naar het invoerbestand (vb in.txt)
+en <output> het uitvoerbestand (vb out.txt) (outputbestand moet niet bestaan, folder wel)
+
+
+2. GERANDOMISEERDE INPUT MET UITVOERING
+
+Indien extra en volledig willekeurige input nodig is, is volgend commando ook beschikbaar:
+
+	java -jar toepMeetk.jar RANDOM <input> <output> <ALGORITHM (1,2 or 3)> <DIM> <IN SIZE>
+
+Waarbij 'RANDOM' volledig hoofdletters moet zijn, <input> en <output> paden zijn naar bestanden
+(De bestanden zelf moeten niet bestaan bij uitvoering), <ALGORITHM (1,2 or 3)> het algoritme dat
+gebruikt moet worden, <DIM> het aantal dimensies van de punten, en <IN SIZE> het aantal punten.
+
+!!! Bij RANDOM overschrijven we het gegeven input bestand of maken we het aan !!!
+
+
+3. GERANDOMISEERDE INPUT ZONDER UITVOERING
+
+Indien enkel het gerandomiseerde bestand nodig is, zonder het eigenlijk uit te voeren,
+is er ook de mogelijkheid om het output-pad te vervangen met "norun"
+!Let op! Dit werkt ook bij "gewone" uitvoering, dus indien "norun" staat bij
+			het uitvoer-pad, dan zal het programma niet uitvoeren.
+
+
+4. SNELLE EN GEMAKKELIJKE UITVOERING
+
+De gemakkelijkste manier om alles in 1 keer uit te voeren is door 'tests.sh' uit te voeren.
+Uitleg over dit bestand staat in het bestand zelf.

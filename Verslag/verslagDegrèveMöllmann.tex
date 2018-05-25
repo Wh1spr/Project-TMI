@@ -57,7 +57,9 @@ De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 \end{algorithmic}
 \end{algorithm}
 
-\section{Opdracht 1: Hoog-niveau beschrijving van verscheidene algoritmes}
+\newpage
+
+\section{Analyse van de verschillende algoritmes}
 
 \subsection{Brute-force algorithm}
 
@@ -112,14 +114,15 @@ De willeukeurige co\"ordinaten kunnen waardes aannemen tussen $[0, 5[$.
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Opmerking}
-Als we tijdens de behandeling van $p_i$ tegenkomen dat buiten de verticale
-strook V ligt, heeft het zin om dit punt uit de zoekboom te verwijderen. Deze bewerking neemt
-$O(logK)$ elementaire operaties in beslag, en kan voor iedere keer dat het punt nogmaals in de horizontale strook terecht komt $O(logK)$ elementaire operaties (voor het zoeken) besparen. Door het verwijderen van deze elementen wordt $K_{gem}$ ook veel kleiner, en dus worden er minder \textit{boven} en \textit{onder} bewerkingen uitgevoerd. \\
-Het is niet nodig, maar zal het aantal bewerkingen wel verminderen.
+\subsubsection{rekencomplexiteit}
+We zullen dus nagaan dat de rekencomplexiteit van dit algoritme gelijk is aan $O(N*Kgem)$.
+We kunnen in het hoogniveau algoritme zien dat de eerste for-lus zal itereren over $N-1$ punten.
+Voor elk van die punten zullen we dus de afstand bepalen van de punten die binnen de verticale strook V.
+Indien we het $K_{gem}$ bepalen (uitgemiddeld over $i = 1,...,N$) zullen we een goede schatting hebben hoeveel punten er worden vergeleken in iedere iteratie van de doorlooplijn.
+We rekenen bij $K_{gem}$ ook het eerste element bij die een $K$ zal hebben van 0, dus kunnen we bij onze doorloplijn iteratie het eerste punt ook meetellen.
+We kunnen dus concluderen dat de rekencomplexiteit van variant 1 gelijk zal zijn aan $O(N*Kgem)$.
 
-\subsection{worst-case puntenverzameling}
-
+\subsubsection{worst-case puntenverzameling}
 Voor de \textit{worst-case} puntenverzameling voor de eerste variant van het doorlooplijnalgoritme voor $M = 2$ hebben we een javafunctie \texttt{makeWorstCase}.
 In deze functie maken een puntenverzameling aan van één kolom, waarbij alle punten dezelfde x-waarde hebben.
 De y-waarde speelt hierbij geen rol.
@@ -135,7 +138,7 @@ De rekencomplexiteit is gelijk aan $(N*K_{avg})$, hieruit kunnen we zien dat voo
 Kmax zal ook een stijgend karakter hebben. We kunne afleiden dat voor iedere N de Kmax steeds gelijk zal zijn aan $N-1$.
 Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand berekenen met alle vorige punten.
 
-
+\newpage
 \subsection{Variant 2 algorithm}
 \subsubsection{hoogniveau beschrijving}
 
@@ -170,13 +173,11 @@ Voor de worst-case zal het laatste punt dat gecontroleerd moet worden de afstand
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{rekencomplexiteit}
-De behandeling van ieder punt p zal gemiddeld $O(logN)$ bewerkingen nodig hebben.
-We maken bij onze variant 2 gebruik van een gebalanceerde zoekboom.
-We weten dat alle nodige bewerkingen in $O(logK)$ operaties kunnen uitgevoerd worden in de boom.
-Het algoritme voegt bij elke iteratie het punt dat we aan het behandelen zijn toe aan de boom.
-Bij de behandeling van het laatste punt zullen we alle punten toegevoegd hebben aan de boom.
-Voor het laatste punt zal dus elke bewerking $log(N)$ tijd kosten.
+\subsubsection{Opmerking}
+Als we tijdens de behandeling van $p_i$ tegenkomen dat buiten de verticale
+strook V ligt, heeft het zin om dit punt uit de zoekboom te verwijderen. Deze bewerking neemt
+$O(logK)$ elementaire operaties in beslag, en kan voor iedere keer dat het punt nogmaals in de horizontale strook terecht komt $O(logK)$ elementaire operaties (voor het zoeken) besparen. Door het verwijderen van deze elementen wordt $K_{gem}$ ook veel kleiner, en dus worden er minder \textit{boven} en \textit{onder} bewerkingen uitgevoerd. \\
+Het is niet nodig, maar zal het aantal bewerkingen wel verminderen.
 
 \section{Grafieken}
 \textit{Alle grafieken zijn achteraan te vinden.}
@@ -199,7 +200,7 @@ Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmisc
 Op de y-as zetten we de $K_{max}$ uit die in dit geval zal gaan van een minimum van 2 tot en met een maximum van 25.
 We kunnen op de plot zien dat de grafiek $K_{max}$ een licht stijgend karakter heeft.
 We kunnen wel zien dat steeds $K_{max}$ relatief klein zal blijven ten opzichte van het aantal punten.
-\newpage
+
 \subsection{figuur 3 en 4}
 In figuur 3 zullen we het verband tussen de $K_{avg}$ en het aantal punten plotten voor 2 dimensies.
 Op de x-as zetten we het aantal punten uit van 250 tot 12279 met een logaritmische functie met basis $1.1$.
