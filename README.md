@@ -1,5 +1,5 @@
 # Project TMI: Bepaling Dichtste Puntenpaar.
-Dit practicum vraagt het dichtste puntenpaar in m-dimensies te vinden tussen n punten op 3 verschillende manieren. Deze zijn te vinden in [de opgave](./project2018).
+Dit practicum vraagt het dichtste puntenpaar in m-dimensies te vinden tussen n punten op 3 verschillende manieren. Deze zijn te vinden in [de opgave](./project2018.pdf).
 
 ## Installering
 Clone de repository of download enkel [het jarbestand](./toepMeetk.jar).
